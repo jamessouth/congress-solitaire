@@ -19,7 +19,7 @@ let make = () => {
   //     None
   //   }, [playerName])
   //   Console.log2("xxx", staging)
-  <main className="m-auto w-1/2 h-full grid grid-cols-4 gap-4  ">
+  <main className="m-auto aspect-5/7 h-full grid grid-cols-4  grid-rows-4 gap-2 py-1">
     // lg:p-24
     <Game />
     // {switch route {
