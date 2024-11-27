@@ -1,20 +1,48 @@
+// module LazyGame = {
+//   let make = React.lazy_(() => import(Game.make))
+// }
+
 @react.component
 let make = () => {
-  let (count, setCount) = React.useState(() => 0)
+  //   open Router
+  //   let route = useRouter()
 
-  <div className="p-6">
-    <h1 className="text-3xl font-semibold"> {"What is this about?"->React.string} </h1>
-    <p>
-      {React.string("This is a simple template for a Vite project using ReScript & Tailwind CSS.")}
-    </p>
-    <h2 className="text-2xl font-semibold mt-5"> {React.string("Fast Refresh Test")} </h2>
-    <Button onClick={_ => setCount(count => count + 1)}>
-      {React.string(`count is ${count->Int.toString}`)}
-    </Button>
-    <p>
-      {React.string("Edit ")}
-      <code> {React.string("src/App.res")} </code>
-      {React.string(" and save to test Fast Refresh.")}
-    </p>
-  </div>
+  //   let (staging, setStaging) = React.Uncurried.useState(_ => Staging.Loading)
+
+  //   let (playerName, setPlayerName) = React.Uncurried.useState(_ => "")
+  //   let (codeOrNum, setCodeOrNum) = React.Uncurried.useState(_ => Home.None)
+  //   let (codeOrNumString, setCodeOrNumString) = React.Uncurried.useState(_ => "")
+
+  //   let lazyGame = <LazyGame />
+
+  //   React.useEffect(() => {
+  //     None
+  //   }, [playerName])
+  //   Console.log2("xxx", staging)
+  <main className="m-auto w-1/2 h-full grid grid-cols-4 gap-4  ">
+    // lg:p-24
+    <Game />
+    // {switch route {
+    // | Home =>
+    //   <>
+    //     // <Title />
+    //     <Home
+    //       playerName
+    //       setPlayerName
+    //       codeOrNum
+    //       setCodeOrNum
+    //       codeOrNumString
+    //       setCodeOrNumString
+    //       setStaging
+    //     />
+    //   </>
+    // | Staging =>
+    //   <>
+    //     <Staging playerName staging />
+    //   </>
+    // | Game => <React.Suspense fallback=React.null> lazyGame </React.Suspense>
+    // | Other =>
+    //   <div className="text-center text-4xl bg-orange-100"> {React.string("page not found")} </div>
+    // }}
+  </main>
 }
