@@ -21,7 +21,7 @@ let make = () => {
   //   Console.log2("xxx", staging)
   <main className="m-auto aspect-5/7 h-full grid grid-cols-4  grid-rows-4 gap-2 py-1">
     // lg:p-24
-    <Game />
+    <Game arr=PCard.pCards />
     // {switch route {
     // | Home =>
     //   <>

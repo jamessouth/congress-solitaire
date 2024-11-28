@@ -6,6 +6,13 @@ module.exports = {
       aspectRatio: {
         '5/7': '5 / 7',
       },
+      colors: {
+        cardBlack: '#31373d',
+        cardRed: '#be1931',
+      },
+      fontFamily: {
+        cutive: 'Cutive, serif',
+      },
     },
   },
   plugins: [],
