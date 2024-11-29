@@ -12,19 +12,32 @@
   border-style: solid;
   border-width: 0;
 }
-main {
+main > div:first-child {
   background: linear-gradient(
     to right,
     rgb(33, 185, 33) 22%,
     rgb(30, 211, 30) 27% 73%,
     rgb(33, 185, 33) 78%
   );
-  /* background: lightgreen; */
   grid-template-areas:
     '_0 _1 _2 _3'
     '_4 _5 _6 _7'
     '_8 _9 _10 _11'
     '_12 _13 _14 _15';
+}
+main > div:last-child {
+  background: linear-gradient(
+    to right,
+    rgb(240, 170, 228) 22%,
+    /* rgb(23, 82, 171) 27% 73%, */ rgb(209, 219, 183) 78%
+  );
+  grid-template-areas:
+    'a'
+    'b'
+    'b'
+    'b'
+    'c';
+  height: calc(100vh / 4);
 }
 .dashed {
   outline-style: dashed;
@@ -33,6 +46,20 @@ main {
 .solid {
   outline-style: solid;
   outline-width: 1px;
+}
+.dotted {
+  outline-style: dotted;
+  outline-width: 1px;
+}
+.a {
+  grid-area: a;
+  height: calc(100vh / 4);
+  aspect-ratio: 5/7;
+}
+.c {
+  grid-area: c;
+  height: calc(100vh / 4);
+  aspect-ratio: 5/7;
 }
 ._0 {
   grid-area: _0;
@@ -89,8 +116,8 @@ main {
 @media (max-height: 600px) {
   .card {
     font-size: small;
-  }
-  .card p:nth-child(4) {
-    font-size: 3rem;
+    p:nth-child(4) {
+      font-size: 3rem;
+    }
   }
 }
