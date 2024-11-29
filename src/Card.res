@@ -9,7 +9,7 @@
 // }
 
 @react.component
-let make = (~card) => {
+let make = (~card, ~cls) => {
   let thisCard = PCard.view(card)
   let {suit, symbol, value} = thisCard
   let symbolStr = React.string(symbol)
@@ -22,8 +22,7 @@ let make = (~card) => {
     }
   }
 
-  <div
-    className="card bg-zinc-100 aspect-5/7 grid rounded-lg justify-items-center items-center text-xl ">
+  <div className={`${cls} card bg-zinc-100 aspect-5/7 grid rounded-lg place-items-center text-xl `}>
     <p className={`row-start-2 row-end-3 col-start-2 col-end-3 font-cutive${valueColor}`}>
       {valueStr}
     </p>
