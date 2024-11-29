@@ -1,13 +1,3 @@
-// type dir=|Up|Down
-
-// module EdgeIndex = {
-
-//   @react.component
-//   let make = (~symbol, ~value, ~dir) => {
-
-//   }
-// }
-
 @react.component
 let make = (~card, ~cls) => {
   let thisCard = PCard.view(card)

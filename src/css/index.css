@@ -15,9 +15,9 @@
 main > div:first-child {
   background: linear-gradient(
     to right,
-    rgb(33, 185, 33) 22%,
-    rgb(30, 211, 30) 27% 73%,
-    rgb(33, 185, 33) 78%
+    #3ecc16 22%,
+    #2c7c0f 27% 73%,
+    #3ecc16 78%
   );
   grid-template-areas:
     '_0 _1 _2 _3'
@@ -26,18 +26,32 @@ main > div:first-child {
     '_12 _13 _14 _15';
 }
 main > div:last-child {
-  background: linear-gradient(
-    to right,
-    rgb(240, 170, 228) 22%,
-    /* rgb(23, 82, 171) 27% 73%, */ rgb(209, 219, 183) 78%
-  );
   grid-template-areas:
+    '.'
+    '.'
+    '.'
     'a'
-    'b'
-    'b'
+    '.'
+    '.'
+    '.'
+    '.'
+    '.'
+    '.'
+    '.'
+    '.'
     'b'
     'c';
-  height: calc(100vh / 4);
+}
+.a {
+  grid-area: a;
+}
+.b {
+  grid-area: b;
+  height: calc(25vh);
+}
+.c {
+  grid-area: c;
+  height: calc(25vh);
 }
 .dashed {
   outline-style: dashed;
@@ -51,15 +65,11 @@ main > div:last-child {
   outline-style: dotted;
   outline-width: 1px;
 }
-.a {
-  grid-area: a;
-  height: calc(100vh / 4);
-  aspect-ratio: 5/7;
+span.bb {
+  grid-area: b;
 }
-.c {
+span.cc {
   grid-area: c;
-  height: calc(100vh / 4);
-  aspect-ratio: 5/7;
 }
 ._0 {
   grid-area: _0;
