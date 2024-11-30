@@ -26,4 +26,3 @@ type view = {
 }
 let make: (suit, rank) => t
 let view: t => view
-let pCards: array<t>

@@ -1,14 +1,132 @@
+open PCard
+
+let initialState: Reducer.state = {
+  deck: Array.toShuffled([
+    make(Hearts, King),
+    make(Hearts, Queen),
+    make(Hearts, Jack),
+    make(Hearts, Ten),
+    make(Hearts, Nine),
+    make(Hearts, Eight),
+    make(Hearts, Seven),
+    make(Hearts, Six),
+    make(Hearts, Five),
+    make(Hearts, Four),
+    make(Hearts, Three),
+    make(Hearts, Two),
+    make(Hearts, Ace),
+    make(Clubs, King),
+    make(Clubs, Queen),
+    make(Clubs, Jack),
+    make(Clubs, Ten),
+    make(Clubs, Nine),
+    make(Clubs, Eight),
+    make(Clubs, Seven),
+    make(Clubs, Six),
+    make(Clubs, Five),
+    make(Clubs, Four),
+    make(Clubs, Three),
+    make(Clubs, Two),
+    make(Clubs, Ace),
+    make(Diamonds, King),
+    make(Diamonds, Queen),
+    make(Diamonds, Jack),
+    make(Diamonds, Ten),
+    make(Diamonds, Nine),
+    make(Diamonds, Eight),
+    make(Diamonds, Seven),
+    make(Diamonds, Six),
+    make(Diamonds, Five),
+    make(Diamonds, Four),
+    make(Diamonds, Three),
+    make(Diamonds, Two),
+    make(Diamonds, Ace),
+    make(Spades, King),
+    make(Spades, Queen),
+    make(Spades, Jack),
+    make(Spades, Ten),
+    make(Spades, Nine),
+    make(Spades, Eight),
+    make(Spades, Seven),
+    make(Spades, Six),
+    make(Spades, Five),
+    make(Spades, Four),
+    make(Spades, Three),
+    make(Spades, Two),
+    make(Spades, Ace),
+    make(Hearts, King),
+    make(Hearts, Queen),
+    make(Hearts, Jack),
+    make(Hearts, Ten),
+    make(Hearts, Nine),
+    make(Hearts, Eight),
+    make(Hearts, Seven),
+    make(Hearts, Six),
+    make(Hearts, Five),
+    make(Hearts, Four),
+    make(Hearts, Three),
+    make(Hearts, Two),
+    make(Hearts, Ace),
+    make(Clubs, King),
+    make(Clubs, Queen),
+    make(Clubs, Jack),
+    make(Clubs, Ten),
+    make(Clubs, Nine),
+    make(Clubs, Eight),
+    make(Clubs, Seven),
+    make(Clubs, Six),
+    make(Clubs, Five),
+    make(Clubs, Four),
+    make(Clubs, Three),
+    make(Clubs, Two),
+    make(Clubs, Ace),
+    make(Diamonds, King),
+    make(Diamonds, Queen),
+    make(Diamonds, Jack),
+    make(Diamonds, Ten),
+    make(Diamonds, Nine),
+    make(Diamonds, Eight),
+    make(Diamonds, Seven),
+    make(Diamonds, Six),
+    make(Diamonds, Five),
+    make(Diamonds, Four),
+    make(Diamonds, Three),
+    make(Diamonds, Two),
+    make(Diamonds, Ace),
+    make(Spades, King),
+    make(Spades, Queen),
+    make(Spades, Jack),
+    make(Spades, Ten),
+    make(Spades, Nine),
+    make(Spades, Eight),
+    make(Spades, Seven),
+    make(Spades, Six),
+    make(Spades, Five),
+    make(Spades, Four),
+    make(Spades, Three),
+    make(Spades, Two),
+    make(Spades, Ace),
+  ]),
+}
+
 @react.component
 let make = () => {
-  let (btnMsg, setBtnMsg) = React.Uncurried.useState(_ => "DEAL TO BEGIN")
-  let (btnColor, setBtnColor) = React.Uncurried.useState(_ => "text-cardBlack")
-  let (btnClicked, setBtnClicked) = React.Uncurried.useState(_ => false)
+  let (btnMsg, setBtnMsg) = React.useState(_ => "DEAL TO BEGIN")
+  let (btnColor, setBtnColor) = React.useState(_ => "text-cardBlack")
+  let (btnClicked, setBtnClicked) = React.useState(_ => false)
+  let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
+
+  let {deck} = state
 
   let htp = "HOW TO PLAY"
 
   let on_Click = () => {
     setBtnMsg(_ => htp)
     setBtnColor(_ => "text-cardRed")
+    for _ in 1 to 3 {
+      Console.log(Array.length(deck))
+      dispatch(Deal(deck))
+    }
 
     switch btnMsg == htp {
     | true => setBtnClicked(_ => true)
@@ -18,7 +136,7 @@ let make = () => {
 
   <main className="h-full flex justify-evenly">
     <div className=" aspect-5/7 h-full grid gap-2 py-1">
-      <Game arr=PCard.pCards />
+      <Game deck />
     </div>
     {switch btnClicked {
     | true =>
@@ -45,11 +163,13 @@ let make = () => {
         }}>
         {React.string(btnMsg)}
       </button>
-      <span className="bb absolute font-curtive text-lg text-cardBlack rotate-20 -mt-2 ml-16">
-        {React.string("deck - ")}
+      <span
+        className="bb absolute w-[5.25rem] text-center font-curtive text-lg text-cardBlack rotate-20 -mt-2 ml-12">
+        {React.string(`deck - ${Int.toString(10)}`)}
       </span>
       <CardOutline cls={"dotted b rotate-110  bg-cardback bg-contain"} />
-      <span className="cc absolute font-curtive text-lg text-cardBlack rotate-20 -mt-2 ml-16">
+      <span
+        className="cc absolute w-[5.25rem] text-center font-curtive text-lg text-cardBlack rotate-20 -mt-2 ml-12">
         {React.string("discard")}
       </span>
       <CardOutline cls={"dotted c rotate-110"} />
