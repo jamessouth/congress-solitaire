@@ -1,5 +1,5 @@
 @react.component
-let make = (~tableau) => {
+let make = (~tableau, ~foundations) => {
   <>
     {React.array(
       Array.map([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], i => {
@@ -13,7 +13,22 @@ let make = (~tableau) => {
     )}
     {React.array(
       Array.mapWithIndex(tableau, (stack, i) => {
-        let iStr = "_" ++ Int.toString(i)
+        let iStr = switch i < 4 {
+        | true => "_" ++ Int.toString(4 * i)
+        | false => "_" ++ Int.toString(15 - 4 * (i - 4))
+        }
+        switch Null.toOption(Stack.peek(stack)) {
+        | Some(card) => <Card key={iStr} card cls=iStr />
+        | None => React.null
+        }
+      }),
+    )}
+    {React.array(
+      Array.mapWithIndex(foundations, (stack, i) => {
+        let iStr = switch i < 4 {
+        | true => "_" ++ Int.toString(4 * i + 1)
+        | false => "_" ++ Int.toString(15 - 4 * (i - 4) - 1)
+        }
         switch Null.toOption(Stack.peek(stack)) {
         | Some(card) => <Card key={iStr} card cls=iStr />
         | None => React.null

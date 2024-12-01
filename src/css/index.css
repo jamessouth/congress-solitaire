@@ -24,6 +24,8 @@ main > div:first-child {
     '_4 _5 _6 _7'
     '_8 _9 _10 _11'
     '_12 _13 _14 _15';
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
 }
 main > div:last-child {
   grid-template-areas:
@@ -47,11 +49,11 @@ main > div:last-child {
 }
 .b {
   grid-area: b;
-  height: calc(25vh);
+  height: 25vh;
 }
 .c {
   grid-area: c;
-  height: calc(25vh);
+  height: 25vh;
 }
 .dashed {
   outline-style: dashed;

@@ -4,6 +4,7 @@ external splice: (array<'a>, ~start: int, ~remove: int) => array<'a> = "splice"
 type state = {
   deck: array<PCard.t>,
   tableau: array<Stack.t<Null.t<PCard.t>>>,
+  foundations: array<Stack.t<Null.t<PCard.t>>>,
 }
 
 type action = DealEight
@@ -11,6 +12,7 @@ type action = DealEight
 let init = clean => {
   deck: clean.deck,
   tableau: clean.tableau,
+  foundations: clean.foundations,
 }
 
 let reducer = (state, action) => {

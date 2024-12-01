@@ -115,6 +115,16 @@ let initialState: Reducer.state = {
     Stack.make(),
     Stack.make(),
   ],
+  foundations: [
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+  ],
 }
 let htp = "HOW TO PLAY"
 
@@ -125,7 +135,7 @@ let make = () => {
   let (btnClicked, setBtnClicked) = React.useState(_ => false)
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
 
-  let {deck, tableau} = state
+  let {deck, tableau, foundations} = state
 
   React.useEffect(() => {
     switch btnMsg == htp {
@@ -148,7 +158,7 @@ let make = () => {
 
   <main className="h-full flex justify-evenly">
     <div className=" aspect-5/7 h-full grid gap-2 py-1">
-      <Game tableau />
+      <Game tableau foundations />
     </div>
     {switch btnClicked {
     | true =>
