@@ -125,8 +125,11 @@ let initialState: Reducer.state = {
     Stack.make(),
     Stack.make(),
   ],
+  moveQueue: Reducer.MoveQueue.make(),
 }
 let htp = "HOW TO PLAY"
+
+@val external document: {..} = "document"
 
 @react.component
 let make = () => {
@@ -135,7 +138,7 @@ let make = () => {
   let (btnClicked, setBtnClicked) = React.useState(_ => false)
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
 
-  let {deck, tableau, foundations} = state
+  let {deck, tableau, foundations, moveQueue} = state
 
   React.useEffect(() => {
     switch btnMsg == htp {
@@ -155,9 +158,30 @@ let make = () => {
     | false => ()
     }
   }
-
+  // ["classList"]
   <main className="h-full flex justify-evenly">
-    <div className=" aspect-5/7 h-full grid gap-2 py-1">
+    <div
+      className=" aspect-5/7 h-full grid gap-2 py-1"
+      onClick={e => {
+        let tgt = ReactEvent.Mouse.target(e)
+        let card = switch tgt["classList"][1] {
+        | Some(class) =>
+          switch class == "card" {
+          | true => tgt
+          | false =>
+            switch tgt["parentElement"]["classList"][1] {
+            | Some(class) =>
+              switch class == "card" {
+              | true => tgt["parentElement"]
+              | false => document
+              }
+            | None => document
+            }
+          }
+        | None => document
+        }
+        Console.log(card)
+      }}>
       <Game tableau foundations />
     </div>
     {switch btnClicked {
