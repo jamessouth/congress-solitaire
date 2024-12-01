@@ -1,113 +1,122 @@
-open PCard
-
 let initialState: Reducer.state = {
   deck: Array.toShuffled([
-    make(Hearts, King),
-    make(Hearts, Queen),
-    make(Hearts, Jack),
-    make(Hearts, Ten),
-    make(Hearts, Nine),
-    make(Hearts, Eight),
-    make(Hearts, Seven),
-    make(Hearts, Six),
-    make(Hearts, Five),
-    make(Hearts, Four),
-    make(Hearts, Three),
-    make(Hearts, Two),
-    make(Hearts, Ace),
-    make(Clubs, King),
-    make(Clubs, Queen),
-    make(Clubs, Jack),
-    make(Clubs, Ten),
-    make(Clubs, Nine),
-    make(Clubs, Eight),
-    make(Clubs, Seven),
-    make(Clubs, Six),
-    make(Clubs, Five),
-    make(Clubs, Four),
-    make(Clubs, Three),
-    make(Clubs, Two),
-    make(Clubs, Ace),
-    make(Diamonds, King),
-    make(Diamonds, Queen),
-    make(Diamonds, Jack),
-    make(Diamonds, Ten),
-    make(Diamonds, Nine),
-    make(Diamonds, Eight),
-    make(Diamonds, Seven),
-    make(Diamonds, Six),
-    make(Diamonds, Five),
-    make(Diamonds, Four),
-    make(Diamonds, Three),
-    make(Diamonds, Two),
-    make(Diamonds, Ace),
-    make(Spades, King),
-    make(Spades, Queen),
-    make(Spades, Jack),
-    make(Spades, Ten),
-    make(Spades, Nine),
-    make(Spades, Eight),
-    make(Spades, Seven),
-    make(Spades, Six),
-    make(Spades, Five),
-    make(Spades, Four),
-    make(Spades, Three),
-    make(Spades, Two),
-    make(Spades, Ace),
-    make(Hearts, King),
-    make(Hearts, Queen),
-    make(Hearts, Jack),
-    make(Hearts, Ten),
-    make(Hearts, Nine),
-    make(Hearts, Eight),
-    make(Hearts, Seven),
-    make(Hearts, Six),
-    make(Hearts, Five),
-    make(Hearts, Four),
-    make(Hearts, Three),
-    make(Hearts, Two),
-    make(Hearts, Ace),
-    make(Clubs, King),
-    make(Clubs, Queen),
-    make(Clubs, Jack),
-    make(Clubs, Ten),
-    make(Clubs, Nine),
-    make(Clubs, Eight),
-    make(Clubs, Seven),
-    make(Clubs, Six),
-    make(Clubs, Five),
-    make(Clubs, Four),
-    make(Clubs, Three),
-    make(Clubs, Two),
-    make(Clubs, Ace),
-    make(Diamonds, King),
-    make(Diamonds, Queen),
-    make(Diamonds, Jack),
-    make(Diamonds, Ten),
-    make(Diamonds, Nine),
-    make(Diamonds, Eight),
-    make(Diamonds, Seven),
-    make(Diamonds, Six),
-    make(Diamonds, Five),
-    make(Diamonds, Four),
-    make(Diamonds, Three),
-    make(Diamonds, Two),
-    make(Diamonds, Ace),
-    make(Spades, King),
-    make(Spades, Queen),
-    make(Spades, Jack),
-    make(Spades, Ten),
-    make(Spades, Nine),
-    make(Spades, Eight),
-    make(Spades, Seven),
-    make(Spades, Six),
-    make(Spades, Five),
-    make(Spades, Four),
-    make(Spades, Three),
-    make(Spades, Two),
-    make(Spades, Ace),
+    PCard.make(Hearts, King),
+    PCard.make(Hearts, Queen),
+    PCard.make(Hearts, Jack),
+    PCard.make(Hearts, Ten),
+    PCard.make(Hearts, Nine),
+    PCard.make(Hearts, Eight),
+    PCard.make(Hearts, Seven),
+    PCard.make(Hearts, Six),
+    PCard.make(Hearts, Five),
+    PCard.make(Hearts, Four),
+    PCard.make(Hearts, Three),
+    PCard.make(Hearts, Two),
+    PCard.make(Hearts, Ace),
+    PCard.make(Clubs, King),
+    PCard.make(Clubs, Queen),
+    PCard.make(Clubs, Jack),
+    PCard.make(Clubs, Ten),
+    PCard.make(Clubs, Nine),
+    PCard.make(Clubs, Eight),
+    PCard.make(Clubs, Seven),
+    PCard.make(Clubs, Six),
+    PCard.make(Clubs, Five),
+    PCard.make(Clubs, Four),
+    PCard.make(Clubs, Three),
+    PCard.make(Clubs, Two),
+    PCard.make(Clubs, Ace),
+    PCard.make(Diamonds, King),
+    PCard.make(Diamonds, Queen),
+    PCard.make(Diamonds, Jack),
+    PCard.make(Diamonds, Ten),
+    PCard.make(Diamonds, Nine),
+    PCard.make(Diamonds, Eight),
+    PCard.make(Diamonds, Seven),
+    PCard.make(Diamonds, Six),
+    PCard.make(Diamonds, Five),
+    PCard.make(Diamonds, Four),
+    PCard.make(Diamonds, Three),
+    PCard.make(Diamonds, Two),
+    PCard.make(Diamonds, Ace),
+    PCard.make(Spades, King),
+    PCard.make(Spades, Queen),
+    PCard.make(Spades, Jack),
+    PCard.make(Spades, Ten),
+    PCard.make(Spades, Nine),
+    PCard.make(Spades, Eight),
+    PCard.make(Spades, Seven),
+    PCard.make(Spades, Six),
+    PCard.make(Spades, Five),
+    PCard.make(Spades, Four),
+    PCard.make(Spades, Three),
+    PCard.make(Spades, Two),
+    PCard.make(Spades, Ace),
+    PCard.make(Hearts, King),
+    PCard.make(Hearts, Queen),
+    PCard.make(Hearts, Jack),
+    PCard.make(Hearts, Ten),
+    PCard.make(Hearts, Nine),
+    PCard.make(Hearts, Eight),
+    PCard.make(Hearts, Seven),
+    PCard.make(Hearts, Six),
+    PCard.make(Hearts, Five),
+    PCard.make(Hearts, Four),
+    PCard.make(Hearts, Three),
+    PCard.make(Hearts, Two),
+    PCard.make(Hearts, Ace),
+    PCard.make(Clubs, King),
+    PCard.make(Clubs, Queen),
+    PCard.make(Clubs, Jack),
+    PCard.make(Clubs, Ten),
+    PCard.make(Clubs, Nine),
+    PCard.make(Clubs, Eight),
+    PCard.make(Clubs, Seven),
+    PCard.make(Clubs, Six),
+    PCard.make(Clubs, Five),
+    PCard.make(Clubs, Four),
+    PCard.make(Clubs, Three),
+    PCard.make(Clubs, Two),
+    PCard.make(Clubs, Ace),
+    PCard.make(Diamonds, King),
+    PCard.make(Diamonds, Queen),
+    PCard.make(Diamonds, Jack),
+    PCard.make(Diamonds, Ten),
+    PCard.make(Diamonds, Nine),
+    PCard.make(Diamonds, Eight),
+    PCard.make(Diamonds, Seven),
+    PCard.make(Diamonds, Six),
+    PCard.make(Diamonds, Five),
+    PCard.make(Diamonds, Four),
+    PCard.make(Diamonds, Three),
+    PCard.make(Diamonds, Two),
+    PCard.make(Diamonds, Ace),
+    PCard.make(Spades, King),
+    PCard.make(Spades, Queen),
+    PCard.make(Spades, Jack),
+    PCard.make(Spades, Ten),
+    PCard.make(Spades, Nine),
+    PCard.make(Spades, Eight),
+    PCard.make(Spades, Seven),
+    PCard.make(Spades, Six),
+    PCard.make(Spades, Five),
+    PCard.make(Spades, Four),
+    PCard.make(Spades, Three),
+    PCard.make(Spades, Two),
+    PCard.make(Spades, Ace),
   ]),
+  tableau: [
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+  ],
 }
+let htp = "HOW TO PLAY"
 
 @react.component
 let make = () => {
@@ -116,17 +125,20 @@ let make = () => {
   let (btnClicked, setBtnClicked) = React.useState(_ => false)
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
 
-  let {deck} = state
+  let {deck, tableau} = state
 
-  let htp = "HOW TO PLAY"
+  React.useEffect(() => {
+    switch btnMsg == htp {
+    | true => dispatch(DealEight)
+    | false => ()
+    }
+
+    None
+  }, [btnMsg])
 
   let on_Click = () => {
     setBtnMsg(_ => htp)
     setBtnColor(_ => "text-cardRed")
-    for _ in 1 to 3 {
-      Console.log(Array.length(deck))
-      dispatch(Deal(deck))
-    }
 
     switch btnMsg == htp {
     | true => setBtnClicked(_ => true)
@@ -136,7 +148,7 @@ let make = () => {
 
   <main className="h-full flex justify-evenly">
     <div className=" aspect-5/7 h-full grid gap-2 py-1">
-      <Game deck />
+      <Game tableau />
     </div>
     {switch btnClicked {
     | true =>
@@ -165,7 +177,7 @@ let make = () => {
       </button>
       <span
         className="bb absolute w-[5.25rem] text-center font-curtive text-lg text-cardBlack rotate-20 -mt-2 ml-12">
-        {React.string(`deck - ${Int.toString(10)}`)}
+        {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
       </span>
       <CardOutline cls={"dotted b rotate-110  bg-cardback bg-contain"} />
       <span
