@@ -1,23 +1,6 @@
 @send
 external splice: (array<'a>, ~start: int, ~remove: int) => array<'a> = "splice"
 
-module MoveQueue = {
-  type t = {
-    mutable sourceCard: Null.t<PCard.t>,
-    mutable destCard: Null.t<PCard.t>,
-  }
-  let make = () => {
-    sourceCard: Null.null,
-    destCard: Null.null,
-  }
-  let isEmpty = t => {
-    switch (Null.toOption(t.sourceCard), Null.toOption(t.destCard)) {
-    | (Some(_), Some(_)) | (Some(_), None) | (None, Some(_)) => false
-    | (None, None) => true
-    }
-  }
-}
-
 type state = {
   deck: array<PCard.t>,
   tableau: array<Stack.t<Null.t<PCard.t>>>,

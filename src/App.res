@@ -1,3 +1,5 @@
+@val external parseInt: string => int = "parseInt"
+
 let initialState: Reducer.state = {
   deck: Array.toShuffled([
     PCard.make(Hearts, King),
@@ -125,7 +127,7 @@ let initialState: Reducer.state = {
     Stack.make(),
     Stack.make(),
   ],
-  moveQueue: Reducer.MoveQueue.make(),
+  moveQueue: MoveQueue.make(),
 }
 let htp = "HOW TO PLAY"
 
@@ -149,38 +151,36 @@ let make = () => {
     None
   }, [btnMsg])
 
-  let on_Click = () => {
-    setBtnMsg(_ => htp)
-    setBtnColor(_ => "text-cardRed")
+  let onGameClick = e => {
+    let tgt = ReactEvent.Mouse.target(e)
+    let card = switch tgt["classList"][1] {
+    | Some(class) =>
+      switch class == "card" {
+      | true => tgt
+      | false =>
+        switch tgt["parentElement"]["classList"][1] {
+        | Some(class) =>
+          switch class == "card" {
+          | true => tgt["parentElement"]
+          | false => document
+          }
+        | None => document
+        }
+      }
+    | None => document
+    }
 
-    switch btnMsg == htp {
-    | true => setBtnClicked(_ => true)
-    | false => ()
+    switch card == document {
+    | true => ()
+    | false => MoveQueue.addSourceCard(moveQueue, card["classList"][0])
     }
   }
-  // ["classList"]
+
   <main className="h-full flex justify-evenly">
     <div
       className=" aspect-5/7 h-full grid gap-2 py-1"
       onClick={e => {
-        let tgt = ReactEvent.Mouse.target(e)
-        let card = switch tgt["classList"][1] {
-        | Some(class) =>
-          switch class == "card" {
-          | true => tgt
-          | false =>
-            switch tgt["parentElement"]["classList"][1] {
-            | Some(class) =>
-              switch class == "card" {
-              | true => tgt["parentElement"]
-              | false => document
-              }
-            | None => document
-            }
-          }
-        | None => document
-        }
-        Console.log(card)
+        onGameClick(e)
       }}>
       <Game tableau foundations />
     </div>
@@ -201,24 +201,32 @@ let make = () => {
       </div>
     | false => React.null
     }}
-    <div className="grid h-full relative">
+    <div className="grid h-full ">
       <button
-        className={`a pt-0.5 h-24 w-28 bg-yellow-200 rounded-xl place-self-center font-cutive text-2xl ${btnColor} `}
+        className={`stbtn pt-0.5 h-24 w-28 bg-yellow-200 rounded-xl place-self-center font-cutive text-2xl ${btnColor} `}
         onClick={_ => {
-          on_Click()
+          setBtnMsg(_ => htp)
+          setBtnColor(_ => "text-cardRed")
+
+          switch btnMsg == htp {
+          | true => setBtnClicked(_ => true)
+          | false => ()
+          }
         }}>
         {React.string(btnMsg)}
       </button>
-      <span
-        className="bb absolute w-[5.25rem] text-center font-curtive text-lg text-cardBlack rotate-20 -mt-2 ml-12">
-        {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
-      </span>
-      <CardOutline cls={"dotted b rotate-110  bg-cardback bg-contain"} />
-      <span
-        className="cc absolute w-[5.25rem] text-center font-curtive text-lg text-cardBlack rotate-20 -mt-2 ml-12">
-        {React.string("discard")}
-      </span>
-      <CardOutline cls={"dotted c rotate-110"} />
+      <CardOutline cls={"dotted deck rotate-110 relative bg-cardback bg-contain"}>
+        <span
+          className=" absolute w-[5.25rem] text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
+          {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
+        </span>
+      </CardOutline>
+      <CardOutline cls={"dotted discard rotate-110 relative"}>
+        <span
+          className=" absolute w-[5.25rem] text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
+          {React.string("discard")}
+        </span>
+      </CardOutline>
     </div>
   </main>
 }
