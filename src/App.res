@@ -1,5 +1,3 @@
-@val external parseInt: string => int = "parseInt"
-
 let initialState: Reducer.state = {
   deck: Array.toShuffled([
     PCard.make(Hearts, King),
@@ -107,7 +105,15 @@ let initialState: Reducer.state = {
     PCard.make(Spades, Two),
     PCard.make(Spades, Ace),
   ]),
-  tableau: [
+  gameArea: [
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
+    Stack.make(),
     Stack.make(),
     Stack.make(),
     Stack.make(),
@@ -117,17 +123,7 @@ let initialState: Reducer.state = {
     Stack.make(),
     Stack.make(),
   ],
-  foundations: [
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-  ],
-  moveQueue: MoveQueue.make(),
+  moveQueue: [],
 }
 let htp = "HOW TO PLAY"
 
@@ -140,7 +136,7 @@ let make = () => {
   let (btnClicked, setBtnClicked) = React.useState(_ => false)
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
 
-  let {deck, tableau, foundations, moveQueue} = state
+  let {deck, gameArea, moveQueue} = state
 
   React.useEffect(() => {
     switch btnMsg == htp {
@@ -170,9 +166,9 @@ let make = () => {
     | None => document
     }
 
-    switch card == document {
-    | true => ()
-    | false => MoveQueue.addSourceCard(moveQueue, card["classList"][0])
+    switch card != document {
+    | true => dispatch(AddMoveSourceCell(Array.getUnsafe(card["classList"], 0)))
+    | false => ()
     }
   }
 
@@ -182,7 +178,7 @@ let make = () => {
       onClick={e => {
         onGameClick(e)
       }}>
-      <Game tableau foundations />
+      <Game gameArea />
     </div>
     {switch btnClicked {
     | true =>
