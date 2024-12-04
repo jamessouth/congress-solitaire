@@ -6,8 +6,8 @@ let make = (~gameArea) => {
         let iStr = "_" ++ Int.toString(i)
         let mult = 4 * (i / 4)
         switch i == mult || i == 3 + mult {
-        | true => <CardOutline key={iStr} cls={`dashed ${iStr}`} />
-        | false => <CardOutline key={iStr} cls={`solid ${iStr}`} />
+        | true => <CardOutline key={iStr} cls={`${iStr} dashed`} />
+        | false => <CardOutline key={iStr} cls={`${iStr} solid`} />
         }
       }),
     )}

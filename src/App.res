@@ -123,11 +123,9 @@ let initialState: Reducer.state = {
     Stack.make(),
     Stack.make(),
   ],
-  moveQueue: [],
+  moveQueue: "",
 }
 let htp = "HOW TO PLAY"
-
-@val external document: {..} = "document"
 
 @react.component
 let make = () => {
@@ -149,26 +147,40 @@ let make = () => {
 
   let onGameClick = e => {
     let tgt = ReactEvent.Mouse.target(e)
-    let card = switch tgt["classList"][1] {
-    | Some(class) =>
-      switch class == "card" {
-      | true => tgt
-      | false =>
-        switch tgt["parentElement"]["classList"][1] {
-        | Some(class) =>
-          switch class == "card" {
-          | true => tgt["parentElement"]
-          | false => document
-          }
-        | None => document
+    let cell = switch tgt["nodeName"] == "DIV" {
+    | true =>
+      switch tgt["classList"][0] {
+      | Some(class) =>
+        switch String.startsWith(class, "_") {
+        | true => class
+        | false => ""
         }
+      | None => ""
       }
-    | None => document
+    | false =>
+      switch tgt["parentElement"]["nodeName"] == "DIV" {
+      | true =>
+        switch tgt["parentElement"]["classList"][0] {
+        | Some(class) =>
+          switch String.startsWith(class, "_") {
+          | true => class
+          | false => ""
+          }
+        | None => ""
+        }
+      | false => ""
+      }
     }
 
-    switch card != document {
-    | true => dispatch(AddMoveSourceCell(Array.getUnsafe(card["classList"], 0)))
-    | false => ()
+    switch (cell != "", String.length(moveQueue) == 0) {
+    | (true, true) =>
+      // Console.log("tt")
+      dispatch(AddMoveSource(cell))
+    | (true, false) =>
+      // Console.log("tt")
+      dispatch(MoveCard(cell))
+    | (false, _) => ()
+    //   Console.log("tf")
     }
   }
 

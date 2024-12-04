@@ -6,10 +6,10 @@ external splice: (array<'a>, ~start: int, ~remove: int) => array<'a> = "splice"
 type state = {
   deck: array<PCard.t>,
   gameArea: array<Stack.t<Null.t<PCard.t>>>,
-  moveQueue: array<string>,
+  moveQueue: string,
 }
 
-type action = DealEight | AddMoveSourceCell(string)
+type action = DealEight | AddMoveSource(string) | MoveCard(string)
 
 let init = clean => {
   deck: clean.deck,
@@ -37,13 +37,43 @@ let reducer = (state, action) => {
         deck: state.deck,
       }
     }
-  | AddMoveSourceCell(cell) => switch Array.length(state.moveQueue) == 0 {
+  | AddMoveSource(cell) =>
+    switch String.length(state.moveQueue) == 0 {
     | true => {
-        ...state,
-        moveQueue: [cell],
+        let sourceCellInd = parseInt(String.sliceToEnd(cell, ~start=1))
+        switch Stack.isEmpty(Array.getUnsafe(state.gameArea, sourceCellInd)) {
+        | true => state
+        | false => {
+            ...state,
+            moveQueue: cell,
+          }
+        }
       }
 
     | false => state
+    }
+
+  | MoveCard(cell) =>
+    switch (String.length(state.moveQueue) > 0, state.moveQueue == cell) {
+    | (true, true) => {
+        ...state,
+        moveQueue: "",
+      }
+    | (true, false) => {
+        let sourceCellInd = parseInt(String.sliceToEnd(state.moveQueue, ~start=1))
+        let destCellInd = parseInt(String.sliceToEnd(cell, ~start=1))
+        let card = Stack.pop(Array.getUnsafe(state.gameArea, sourceCellInd))
+        Console.log3(sourceCellInd, destCellInd, card)
+
+        Stack.push(Array.getUnsafe(state.gameArea, destCellInd), card)
+
+        {
+          ...state,
+          moveQueue: "",
+        }
+      }
+
+    | (false, _) => state
     }
   }
 }
