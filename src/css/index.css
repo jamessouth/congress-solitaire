@@ -42,7 +42,7 @@ main > div:last-child {
     '.'
     '.'
     'deck'
-    'discard';
+    '_99';
 }
 .stbtn {
   grid-area: stbtn;
@@ -51,8 +51,8 @@ main > div:last-child {
   grid-area: deck;
   height: 25vh;
 }
-.discard {
-  grid-area: discard;
+._99 {
+  grid-area: _99;
   height: 25vh;
 }
 .dashed {

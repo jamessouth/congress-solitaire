@@ -124,26 +124,31 @@ let initialState: Reducer.state = {
     Stack.make(),
   ],
   moveQueue: "",
+  discard: Stack.make(),
 }
 let htp = "HOW TO PLAY"
 
 @react.component
 let make = () => {
-  let (btnMsg, setBtnMsg) = React.useState(_ => "DEAL TO BEGIN")
-  let (btnColor, setBtnColor) = React.useState(_ => "text-cardBlack")
-  let (btnClicked, setBtnClicked) = React.useState(_ => false)
+  let (startBtnText, setStartBtnText) = React.useState(_ => "DEAL TO BEGIN")
+  let (startBtnColor, setStartBtnColor) = React.useState(_ => "text-cardBlack")
+  let (modalOpen, setModalOpen) = React.useState(_ => false)
+  let (gameStarted, setGameStarted) = React.useState(_ => false)
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
 
-  let {deck, gameArea, moveQueue} = state
+  let {deck, gameArea, moveQueue, discard} = state
 
   React.useEffect(() => {
-    switch btnMsg == htp {
-    | true => dispatch(DealEight)
+    switch startBtnText == htp {
+    | true => {
+        dispatch(DealEight)
+        setGameStarted(_ => true)
+      }
     | false => ()
     }
 
     None
-  }, [btnMsg])
+  }, [startBtnText])
 
   let onGameClick = e => {
     let tgt = ReactEvent.Mouse.target(e)
@@ -173,33 +178,24 @@ let make = () => {
     }
 
     switch (cell != "", String.length(moveQueue) == 0) {
-    | (true, true) =>
-      // Console.log("tt")
-      dispatch(AddMoveSource(cell))
-    | (true, false) =>
-      // Console.log("tt")
-      dispatch(MoveCard(cell))
+    | (true, true) => dispatch(AddMoveSource(cell))
+    | (true, false) => dispatch(MoveCard(cell))
     | (false, _) => ()
-    //   Console.log("tf")
     }
   }
 
   <main className="h-full flex justify-evenly">
-    <div
-      className=" aspect-5/7 h-full grid gap-2 py-1"
-      onClick={e => {
-        onGameClick(e)
-      }}>
+    <div className=" aspect-5/7 h-full grid gap-2 py-1" onClick={e => onGameClick(e)}>
       <Game gameArea />
     </div>
-    {switch btnClicked {
+    {switch modalOpen {
     | true =>
       <div
-        className="bg-red-200 text-cardBlack absolute inset-y-1/4 rounded-lg font-cutive text-lg h-72 w-48 p-2">
+        className="bg-red-200 text-cardBlack absolute inset-y-1/4 rounded-lg font-serif text-lg h-72 w-48 p-2">
         <button
-          className="float-right text-xl"
+          className="float-right text-xl font-cutive"
           onClick={_ => {
-            setBtnClicked(_ => false)
+            setModalOpen(_ => false)
           }}>
           {React.string("X")}
         </button>
@@ -209,32 +205,46 @@ let make = () => {
       </div>
     | false => React.null
     }}
-    <div className="grid h-full ">
+    <div
+      className="grid h-full "
+      //   onClick={switch gameStarted {
+      //   | true => e => onGameClick(e)
+      //   | false => _ => ()
+      //   }}
+    >
       <button
-        className={`stbtn pt-0.5 h-24 w-28 bg-yellow-200 rounded-xl place-self-center font-cutive text-2xl ${btnColor} `}
+        className={`stbtn pt-0.5 h-24 w-28 bg-yellow-200 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
         onClick={_ => {
-          setBtnMsg(_ => htp)
-          setBtnColor(_ => "text-cardRed")
-
-          switch btnMsg == htp {
-          | true => setBtnClicked(_ => true)
+          switch startBtnText == htp {
+          | true => setModalOpen(_ => true)
           | false => ()
           }
+          setStartBtnText(_ => htp)
+          setStartBtnColor(_ => "text-cardRed")
         }}>
-        {React.string(btnMsg)}
+        {React.string(startBtnText)}
       </button>
-      <CardOutline cls={"dotted deck rotate-110 relative bg-cardback bg-contain"}>
+      <CardOutline
+        cls={"dotted deck rotate-110 relative bg-cardback bg-contain cursor-pointer"}
+        onClick={switch gameStarted {
+        | true => _ => dispatch(DealOne)
+        | false => _ => ()
+        }}>
         <span
           className=" absolute w-[5.25rem] text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
           {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
         </span>
       </CardOutline>
-      <CardOutline cls={"dotted discard rotate-110 relative"}>
+      <CardOutline cls={"dotted _99 rotate-110 relative cursor-pointer"}>
         <span
           className=" absolute w-[5.25rem] text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
           {React.string("discard")}
         </span>
       </CardOutline>
+      {switch Null.toOption(Stack.peek(discard)) {
+      | Some(card) => <Card card cls="_99 rotate-110" />
+      | None => React.null
+      }}
     </div>
   </main>
 }

@@ -7,14 +7,20 @@ type state = {
   deck: array<PCard.t>,
   gameArea: array<Stack.t<Null.t<PCard.t>>>,
   moveQueue: string,
+  discard: Stack.t<Null.t<PCard.t>>,
 }
 
-type action = DealEight | AddMoveSource(string) | MoveCard(string)
+type action =
+  | DealEight
+  | DealOne
+  | AddMoveSource(string)
+  | MoveCard(string)
 
 let init = clean => {
   deck: clean.deck,
   gameArea: clean.gameArea,
   moveQueue: clean.moveQueue,
+  discard: clean.discard,
 }
 
 let reducer = (state, action) => {
@@ -37,6 +43,20 @@ let reducer = (state, action) => {
         deck: state.deck,
       }
     }
+
+  | DealOne =>
+    switch Array.shift(state.deck) {
+    | Some(card) => {
+        Stack.push(state.discard, Null.make(card))
+
+        {
+          ...state,
+          deck: state.deck,
+        }
+      }
+    | None => state
+    }
+
   | AddMoveSource(cell) =>
     switch String.length(state.moveQueue) == 0 {
     | true => {
@@ -63,7 +83,6 @@ let reducer = (state, action) => {
         let sourceCellInd = parseInt(String.sliceToEnd(state.moveQueue, ~start=1))
         let destCellInd = parseInt(String.sliceToEnd(cell, ~start=1))
         let card = Stack.pop(Array.getUnsafe(state.gameArea, sourceCellInd))
-        Console.log3(sourceCellInd, destCellInd, card)
 
         Stack.push(Array.getUnsafe(state.gameArea, destCellInd), card)
 
