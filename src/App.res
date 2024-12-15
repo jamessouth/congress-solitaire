@@ -105,7 +105,7 @@ let initialState: Reducer.state = {
     PCard.make(Spades, Two),
     PCard.make(Spades, Ace),
   ]),
-  gameArea: [
+  tableau: [
     Stack.make(),
     Stack.make(),
     Stack.make(),
@@ -114,14 +114,16 @@ let initialState: Reducer.state = {
     Stack.make(),
     Stack.make(),
     Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
-    Stack.make(),
+  ],
+  foundations: [
+    Null.null,
+    Null.null,
+    Null.null,
+    Null.null,
+    Null.null,
+    Null.null,
+    Null.null,
+    Null.null,
   ],
   moveQueue: "",
   discard: Stack.make(),
@@ -136,7 +138,7 @@ let make = () => {
   let (gameStarted, setGameStarted) = React.useState(_ => false)
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
 
-  let {deck, gameArea, moveQueue, discard} = state
+  let {deck, tableau, foundations, moveQueue, discard} = state
 
   React.useEffect(() => {
     switch startBtnText == htp {
@@ -156,7 +158,7 @@ let make = () => {
     | true =>
       switch tgt["classList"][0] {
       | Some(class) =>
-        switch String.startsWith(class, "_") {
+        switch String.startsWith(class, "x") {
         | true => class
         | false => ""
         }
@@ -167,7 +169,7 @@ let make = () => {
       | true =>
         switch tgt["parentElement"]["classList"][0] {
         | Some(class) =>
-          switch String.startsWith(class, "_") {
+          switch String.startsWith(class, "x") {
           | true => class
           | false => ""
           }
@@ -186,7 +188,7 @@ let make = () => {
 
   <main className="h-full flex justify-evenly">
     <div className=" aspect-5/7 h-full grid gap-2 py-1" onClick={e => onGameClick(e)}>
-      <Game gameArea moveQueue />
+      <Game tableau foundations moveQueue />
     </div>
     {switch modalOpen {
     | true =>
@@ -243,7 +245,7 @@ let make = () => {
         </span>
       </CardOutline>
       <CardOutline
-        cls={"dotted _99 rotate-110 relative select-none " ++
+        cls={"dotted x99 rotate-110 relative select-none " ++
         switch gameStarted {
         | true => "cursor-pointer"
         | false => "cursor-not-allowed"
@@ -254,7 +256,7 @@ let make = () => {
         </span>
       </CardOutline>
       {switch Null.toOption(Stack.peek(discard)) {
-      | Some(card) => <Card card cls="_99 rotate-110" isSelected={moveQueue == "_99"} />
+      | Some(card) => <Card card cls="x99 rotate-110" isSelected={moveQueue == "x99"} />
       | None => React.null
       }}
     </div>

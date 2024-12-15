@@ -17,7 +17,7 @@ let make = (~card, ~cls, ~isSelected) => {
   }
 
   <div
-    className={`${cls} card bg-zinc-100 aspect-5/7 grid rounded-lg place-items-center text-xl cursor-pointer select-none`}>
+    className={`[grid-area:${cls}] card bg-zinc-100 aspect-5/7 grid rounded-lg place-items-center text-xl cursor-pointer select-none`}>
     <p className={`row-start-2 row-end-3 col-start-2 col-end-3${valueFont}${valueColor}`}>
       {valueStr}
     </p>
