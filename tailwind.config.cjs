@@ -9,6 +9,9 @@ module.exports = {
       backgroundImage: {
         cardback: 'url(/cardback.jpg)',
       },
+      boxShadow: {
+        rules: '0 0 100px 70px #31373d',
+      },
       colors: {
         cardBlack: '#31373d',
         cardRed: '#be1931',

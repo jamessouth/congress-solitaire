@@ -176,22 +176,22 @@ let make = () => {
       | false => ""
       }
     }
+    Console.log(cell)
 
-    switch (cell != "", String.length(moveQueue) == 0) {
-    | (true, true) => dispatch(AddMoveSource(cell))
-    | (true, false) => dispatch(MoveCard(cell))
-    | (false, _) => ()
+    switch String.length(moveQueue) == 0 {
+    | true => dispatch(AddMoveSource(cell))
+    | false => dispatch(MoveCard(cell))
     }
   }
 
   <main className="h-full flex justify-evenly">
     <div className=" aspect-5/7 h-full grid gap-2 py-1" onClick={e => onGameClick(e)}>
-      <Game gameArea />
+      <Game gameArea moveQueue />
     </div>
     {switch modalOpen {
     | true =>
       <div
-        className="bg-red-200 text-cardBlack absolute inset-y-1/4 rounded-lg font-serif text-lg h-72 w-48 p-2">
+        className="bg-red-200 text-cardBlack absolute inset-y-1/4 rounded-lg font-serif text-lg h-72 w-48 p-2 shadow-rules">
         <button
           className="float-right text-xl font-cutive"
           onClick={_ => {
@@ -207,11 +207,10 @@ let make = () => {
     }}
     <div
       className="grid h-full "
-      //   onClick={switch gameStarted {
-      //   | true => e => onGameClick(e)
-      //   | false => _ => ()
-      //   }}
-    >
+      onClick={switch gameStarted {
+      | true => e => onGameClick(e)
+      | false => _ => ()
+      }}>
       <button
         className={`stbtn pt-0.5 h-24 w-28 bg-yellow-200 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
         onClick={_ => {
@@ -225,24 +224,37 @@ let make = () => {
         {React.string(startBtnText)}
       </button>
       <CardOutline
-        cls={"dotted deck rotate-110 relative bg-cardback bg-contain cursor-pointer"}
+        cls={"dotted deck rotate-110 relative bg-contain select-none " ++
+        switch gameStarted {
+        | true => "cursor-pointer "
+        | false => "cursor-not-allowed "
+        } ++
+        switch Array.length(deck) == 0 {
+        | true => ""
+        | false => "bg-cardback"
+        }}
         onClick={switch gameStarted {
         | true => _ => dispatch(DealOne)
         | false => _ => ()
         }}>
         <span
-          className=" absolute w-[5.25rem] text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
+          className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
           {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
         </span>
       </CardOutline>
-      <CardOutline cls={"dotted _99 rotate-110 relative cursor-pointer"}>
+      <CardOutline
+        cls={"dotted _99 rotate-110 relative select-none " ++
+        switch gameStarted {
+        | true => "cursor-pointer"
+        | false => "cursor-not-allowed"
+        }}>
         <span
-          className=" absolute w-[5.25rem] text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
-          {React.string("discard")}
+          className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
+          {React.string(`discard - ${Int.toString(Stack.getSize(discard))}`)}
         </span>
       </CardOutline>
       {switch Null.toOption(Stack.peek(discard)) {
-      | Some(card) => <Card card cls="_99 rotate-110" />
+      | Some(card) => <Card card cls="_99 rotate-110" isSelected={moveQueue == "_99"} />
       | None => React.null
       }}
     </div>

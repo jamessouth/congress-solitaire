@@ -58,23 +58,39 @@ let reducer = (state, action) => {
     }
 
   | AddMoveSource(cell) =>
-    switch String.length(state.moveQueue) == 0 {
+    switch cell != "" {
     | true => {
         let sourceCellInd = parseInt(String.sliceToEnd(cell, ~start=1))
-        switch Stack.isEmpty(Array.getUnsafe(state.gameArea, sourceCellInd)) {
-        | true => state
+        switch sourceCellInd == 99 {
+        | true =>
+          switch Stack.isEmpty(state.discard) {
+          | true => state
+          | false => {
+              ...state,
+              moveQueue: cell,
+            }
+          }
         | false => {
-            ...state,
-            moveQueue: cell,
+            let mult = 4 * (sourceCellInd / 4)
+            switch sourceCellInd == mult + 1 || sourceCellInd == mult + 2 {
+            | true => state
+            | false =>
+              switch Stack.isEmpty(Array.getUnsafe(state.gameArea, sourceCellInd)) {
+              | true => state
+              | false => {
+                  ...state,
+                  moveQueue: cell,
+                }
+              }
+            }
           }
         }
       }
-
     | false => state
     }
 
   | MoveCard(cell) =>
-    switch (String.length(state.moveQueue) > 0, state.moveQueue == cell) {
+    switch (cell != "", state.moveQueue == cell) {
     | (true, true) => {
         ...state,
         moveQueue: "",
@@ -82,13 +98,24 @@ let reducer = (state, action) => {
     | (true, false) => {
         let sourceCellInd = parseInt(String.sliceToEnd(state.moveQueue, ~start=1))
         let destCellInd = parseInt(String.sliceToEnd(cell, ~start=1))
-        let card = Stack.pop(Array.getUnsafe(state.gameArea, sourceCellInd))
 
-        Stack.push(Array.getUnsafe(state.gameArea, destCellInd), card)
+        switch destCellInd == 99 {
+        | true => state
 
-        {
-          ...state,
-          moveQueue: "",
+        | false => {
+            let card = switch sourceCellInd == 99 {
+            | true => Stack.pop(state.discard)
+
+            | false => Stack.pop(Array.getUnsafe(state.gameArea, sourceCellInd))
+            }
+
+            Stack.push(Array.getUnsafe(state.gameArea, destCellInd), card)
+
+            {
+              ...state,
+              moveQueue: "",
+            }
+          }
         }
       }
 

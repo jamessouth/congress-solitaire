@@ -1,5 +1,5 @@
 @react.component
-let make = (~card, ~cls) => {
+let make = (~card, ~cls, ~isSelected) => {
   let thisCard = PCard.view(card)
   let {suit, symbol, value} = thisCard
   let symbolStr = React.string(symbol)
