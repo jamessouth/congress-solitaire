@@ -187,7 +187,7 @@ let make = () => {
   }
 
   <main className="h-full flex justify-evenly">
-    <div className=" aspect-5/7 h-full grid gap-2 py-1" onClick={e => onGameClick(e)}>
+    <div className=" aspect-9/16 h-full grid gap-2 py-1" onClick={e => onGameClick(e)}>
       <Game tableau foundations moveQueue />
     </div>
     {switch modalOpen {
@@ -226,7 +226,8 @@ let make = () => {
         {React.string(startBtnText)}
       </button>
       <CardOutline
-        cls={"dotted deck rotate-110 relative bg-contain select-none " ++
+        gridArea="deck"
+        cls={"dotted rotate-110 relative bg-contain select-none " ++
         switch gameStarted {
         | true => "cursor-pointer "
         | false => "cursor-not-allowed "
@@ -245,7 +246,8 @@ let make = () => {
         </span>
       </CardOutline>
       <CardOutline
-        cls={"dotted x99 rotate-110 relative select-none " ++
+        gridArea="x99"
+        cls={"dotted rotate-110 relative select-none " ++
         switch gameStarted {
         | true => "cursor-pointer"
         | false => "cursor-not-allowed"
@@ -256,7 +258,7 @@ let make = () => {
         </span>
       </CardOutline>
       {switch Null.toOption(Stack.peek(discard)) {
-      | Some(card) => <Card card cls="x99 rotate-110" isSelected={moveQueue == "x99"} />
+      | Some(card) => <Card card gridArea="x99" cls="rotate-110" isSelected={moveQueue == "x99"} />
       | None => React.null
       }}
     </div>

@@ -1,11 +1,11 @@
 @react.component
-let make = (~cls, ~children=?, ~onClick=?) => {
+let make = (~gridArea, ~cls, ~children=?, ~onClick=?) => {
   <div
     onClick={switch onClick {
     | Some(oc) => oc
-    | None => ()
+    | None => _ => ()
     }}
-    className={`[grid-area:${cls}] aspect-5/7 outline-cardBlack rounded-lg   `}>
+    className={`${gridArea} ${cls} aspect-9/16 outline-cardBlack rounded-lg   `}>
     {switch children {
     | Some(el) => el
     | None => React.null

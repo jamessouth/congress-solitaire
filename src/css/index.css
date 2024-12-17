@@ -67,54 +67,54 @@ main > div:last-child {
   outline-style: dotted;
   outline-width: 1px;
 }
-/* ._0 {
-  grid-area: _0;
+.x0 {
+  grid-area: x0;
 }
-._1 {
-  grid-area: _1;
+.x1 {
+  grid-area: x1;
 }
-._2 {
-  grid-area: _2;
+.x2 {
+  grid-area: x2;
 }
-._3 {
-  grid-area: _3;
+.x3 {
+  grid-area: x3;
 }
-._4 {
-  grid-area: _4;
+.x4 {
+  grid-area: x4;
 }
-._5 {
-  grid-area: _5;
+.x5 {
+  grid-area: x5;
 }
-._6 {
-  grid-area: _6;
+.x6 {
+  grid-area: x6;
 }
-._7 {
-  grid-area: _7;
+.x7 {
+  grid-area: x7;
 }
-._8 {
-  grid-area: _8;
+.xx0 {
+  grid-area: xx0;
 }
-._9 {
-  grid-area: _9;
+.xx1 {
+  grid-area: xx1;
 }
-._10 {
-  grid-area: _10;
+.xx2 {
+  grid-area: xx2;
 }
-._11 {
-  grid-area: _11;
+.xx3 {
+  grid-area: xx3;
 }
-._12 {
-  grid-area: _12;
+.xx4 {
+  grid-area: xx4;
 }
-._13 {
-  grid-area: _13;
+.xx5 {
+  grid-area: xx5;
 }
-._14 {
-  grid-area: _14;
+.xx6 {
+  grid-area: xx6;
 }
-._15 {
-  grid-area: _15;
-} */
+.xx7 {
+  grid-area: xx7;
+}
 .card {
   grid-template-columns: 3% 16% 1fr 16% 3%;
   grid-template-rows: 5% 12% 12% 1fr 12% 12% 5%;

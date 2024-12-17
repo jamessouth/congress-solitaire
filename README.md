@@ -1,42 +1,11 @@
-# congress-solitaire
-Congress card game for DSA class
-# ReScript / Vite Starter Template
+# congress-solitaire &middot; [![](https://img.shields.io/badge/rescript-14162c?logo=rescript&labelColor=fefdfd)](https://rescript-lang.org/) [![](https://img.shields.io/badge/React-23272f?logo=react&logoColor=61DAFB&labelColor=23272f)](https://react.dev/) [![](https://img.shields.io/badge/tailwindcss-f8fafc?logo=tailwindcss&labelColor=f8fafc)](https://tailwindcss.com/) [![](https://img.shields.io/badge/Vite-0f0f0f?logo=vite&labelColor=0f0f0f)](https://vite.dev/) [![](https://img.shields.io/badge/OCaml-ffffff?logo=ocaml&labelColor=ffffff)](https://ocaml.org/)
 
-- [Installation](../../README.md)
+[Congress](<https://en.wikipedia.org/wiki/Congress_(card_game)>) solitaire card game for my DSA class. Many versions of solitaire use a last-in, first-out card pile; in computer science we call this a stack. This version has nine of them!
 
-This is a Vite-based template with following setup:
+### Play here:
 
-- [ReScript](https://rescript-lang.org) 11.0 with @rescript/react, [Core](https://github.com/rescript-association/rescript-core) and JSX v4
-- ES6 modules (ReScript code compiled to `.res.mjs` files)
-- Vite 4 with React Plugin (Fast Refresh)
-- Tailwind 3
+[jamessouth.github.io/congress-solitaire](https://jamessouth.github.io/congress-solitaire/)
 
-## Development
+#### Image credits:
 
-Run ReScript in dev mode:
-
-```sh
-npm run res:dev
-```
-
-In another tab, run the Vite dev server:
-
-```sh
-npm run dev
-```
-
-## Tips
-
-### Fast Refresh & ReScript
-
-Make sure to create interface files (`.resi`) for each `*.res` file.
-
-Fast Refresh requires you to **only export React components**, and it's easy to unintenionally export other values that will disable Fast Refresh (you will see a message in the browser console whenever this happens).
-
-### Why are the generated `.res.mjs` files tracked in git?
-
-In ReScript, it's a good habit to keep track of the actual JS output the compiler emits. It allows quick sanity checking if we made any changes that actually have an impact on the resulting JS code (especially when doing major compiler upgrades, it's a good way to verify if production code will behave the same way as before the upgrade).
-
-This will also make it easier for your Non-ReScript coworkers to read and understand the changes in Github PRs, and call you out when you are writing inefficient code.
-
-If you want to opt-out, feel free to remove all compiled `.res.mjs` files within the `src` directory and add `src/**/*.res.mjs` in your `.gitignore`.
+The card images are in the public domain and are from a [French-suited](https://en.wikipedia.org/wiki/French-suited_playing_cards) deck of cards called "Tarot Allemand" by BP Grimaud, Paris, France, 1898. Compared to standard 52-card decks, [tarot decks](https://en.wikipedia.org/wiki/Tarot) have 26 additional cards (the Fool, four Knights, and a suit of 21 trump cards), but they are not used here. Additionally, instead of aces there are just "one" cards. Images downloaded from [Bibliothèque nationale de France.](https://gallica.bnf.fr/ark:/12148/btv1b10510159t)

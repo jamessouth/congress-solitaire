@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       aspectRatio: {
-        '5/7': '5 / 7',
+        '9/16': '9 / 16',
       },
       backgroundImage: {
         cardback: 'url(/cardback.jpg)',

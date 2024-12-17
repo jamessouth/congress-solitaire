@@ -1,5 +1,5 @@
 @react.component
-let make = (~card, ~cls, ~isSelected) => {
+let make = (~card, ~gridArea, ~cls, ~isSelected) => {
   let thisCard = PCard.view(card)
   let {suit, symbol, value} = thisCard
   let symbolStr = React.string(symbol)
@@ -17,7 +17,7 @@ let make = (~card, ~cls, ~isSelected) => {
   }
 
   <div
-    className={`[grid-area:${cls}] card bg-zinc-100 aspect-5/7 grid rounded-lg place-items-center text-xl cursor-pointer select-none`}>
+    className={`${gridArea} ${cls} card bg-zinc-100 aspect-9/16 grid rounded-lg place-items-center text-xl cursor-pointer select-none`}>
     <p className={`row-start-2 row-end-3 col-start-2 col-end-3${valueFont}${valueColor}`}>
       {valueStr}
     </p>
