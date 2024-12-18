@@ -1,32 +1,22 @@
 @react.component
-let make = (~card, ~gridArea, ~cls, ~isSelected) => {
-  let thisCard = PCard.view(card)
-  let {suit, symbol, value} = thisCard
-  let symbolStr = React.string(symbol)
-  let (_, val) = value
-  let valueFont = switch val == "10" {
-  | true => " font-serif"
-  | false => " font-cutive"
-  }
-  let valueStr = React.string(val)
-  let valueColor = {
-    switch suit {
-    | Hearts | Diamonds => " text-cardRed"
-    | Clubs | Spades => " text-cardBlack"
-    }
-  }
-
+let make = (~card, ~gridArea, ~isSelected) => {
+  let {bgclass} = PCard.view(card)
+  // place-items-center text-xl grid bg-zinc-100
   <div
-    className={`${gridArea} ${cls} card bg-zinc-100 aspect-9/16 grid rounded-lg place-items-center text-xl cursor-pointer select-none`}>
-    <p className={`row-start-2 row-end-3 col-start-2 col-end-3${valueFont}${valueColor}`}>
-      {valueStr}
-    </p>
-    <p
-      className={`row-start-6 row-end-7 col-start-4 col-end-5 rotate-180${valueFont}${valueColor}`}>
-      {valueStr}
-    </p>
-    <p className="row-start-3 row-end-4 col-start-2 col-end-3"> {symbolStr} </p>
-    <p className="row-start-5 row-end-6 col-start-4 col-end-5 rotate-180 "> {symbolStr} </p>
-    <p className="row-start-4 row-end-5 col-start-3 col-end-4 text-6xl"> {symbolStr} </p>
+    className={`${gridArea} ${bgclass} aspect-9/16 bg-contain rounded-lg  cursor-pointer select-none ` ++
+    switch gridArea == "x99" {
+    | true => "-rotate-70"
+    | false => ""
+    }}>
+    // <p className={`row-start-2 row-end-3 col-start-2 col-end-3${valueFont}${valueColor}`}>
+    //   {valueStr}
+    // </p>
+    // <p
+    //   className={`row-start-6 row-end-7 col-start-4 col-end-5 rotate-180${valueFont}${valueColor}`}>
+    //   {valueStr}
+    // </p>
+    // <p className="row-start-3 row-end-4 col-start-2 col-end-3"> {symbolStr} </p>
+    // <p className="row-start-5 row-end-6 col-start-4 col-end-5 rotate-180 "> {symbolStr} </p>
+    // <p className="row-start-4 row-end-5 col-start-3 col-end-4 text-6xl"> {symbolStr} </p>
   </div>
 }

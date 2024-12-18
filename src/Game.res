@@ -36,8 +36,7 @@ let make = (~tableau, ~foundations, ~moveQueue) => {
       Array.mapWithIndex(tableau, (stack, i) => {
         let gridArea = "x" ++ Int.toString(i)
         switch Null.toOption(Stack.peek(stack)) {
-        | Some(card) =>
-          <Card key=gridArea card gridArea cls="" isSelected={moveQueue == gridArea} />
+        | Some(card) => <Card key=gridArea card gridArea isSelected={moveQueue == gridArea} />
         | None => React.null
         }
       }),
@@ -46,7 +45,7 @@ let make = (~tableau, ~foundations, ~moveQueue) => {
       Array.mapWithIndex(foundations, (card, i) => {
         let gridArea = "xx" ++ Int.toString(i)
         switch Null.toOption(card) {
-        | Some(card) => <Card key=gridArea card gridArea cls="" isSelected=false />
+        | Some(card) => <Card key=gridArea card gridArea isSelected=false />
         | None => React.null
         }
       }),

@@ -115,7 +115,7 @@ main > div:last-child {
 .xx7 {
   grid-area: xx7;
 }
-.card {
+/* .card {
   grid-template-columns: 3% 16% 1fr 16% 3%;
   grid-template-rows: 5% 12% 12% 1fr 12% 12% 5%;
 }
@@ -126,4 +126,161 @@ main > div:last-child {
       font-size: 3rem;
     }
   }
+} */
+
+.clubs_ace {
+  background-image: url(/clubs_ace.jpg);
+}
+.clubs_eight {
+  background-image: url(/clubs_eight.jpg);
+}
+.clubs_five {
+  background-image: url(/clubs_five.jpg);
+}
+.clubs_four {
+  background-image: url(/clubs_four.jpg);
+}
+.clubs_jack {
+  background-image: url(/clubs_jack.jpg);
+}
+.clubs_king {
+  background-image: url(/clubs_king.jpg);
+}
+.clubs_nine {
+  background-image: url(/clubs_nine.jpg);
+}
+.clubs_queen {
+  background-image: url(/clubs_queen.jpg);
+}
+.clubs_seven {
+  background-image: url(/clubs_seven.jpg);
+}
+.clubs_six {
+  background-image: url(/clubs_six.jpg);
+}
+.clubs_ten {
+  background-image: url(/clubs_ten.jpg);
+}
+.clubs_three {
+  background-image: url(/clubs_three.jpg);
+}
+.clubs_two {
+  background-image: url(/clubs_two.jpg);
+}
+.diamonds_ace {
+  background-image: url(/diamonds_ace.jpg);
+}
+.diamonds_eight {
+  background-image: url(/diamonds_eight.jpg);
+}
+.diamonds_five {
+  background-image: url(/diamonds_five.jpg);
+}
+.diamonds_four {
+  background-image: url(/diamonds_four.jpg);
+}
+.diamonds_jack {
+  background-image: url(/diamonds_jack.jpg);
+}
+.diamonds_king {
+  background-image: url(/diamonds_king.jpg);
+}
+.diamonds_nine {
+  background-image: url(/diamonds_nine.jpg);
+}
+.diamonds_queen {
+  background-image: url(/diamonds_queen.jpg);
+}
+.diamonds_seven {
+  background-image: url(/diamonds_seven.jpg);
+}
+.diamonds_six {
+  background-image: url(/diamonds_six.jpg);
+}
+.diamonds_ten {
+  background-image: url(/diamonds_ten.jpg);
+}
+.diamonds_three {
+  background-image: url(/diamonds_three.jpg);
+}
+.diamonds_two {
+  background-image: url(/diamonds_two.jpg);
+}
+.hearts_ace {
+  background-image: url(/hearts_ace.jpg);
+}
+.hearts_eight {
+  background-image: url(/hearts_eight.jpg);
+}
+.hearts_five {
+  background-image: url(/hearts_five.jpg);
+}
+.hearts_four {
+  background-image: url(/hearts_four.jpg);
+}
+.hearts_jack {
+  background-image: url(/hearts_jack.jpg);
+}
+.hearts_king {
+  background-image: url(/hearts_king.jpg);
+}
+.hearts_nine {
+  background-image: url(/hearts_nine.jpg);
+}
+.hearts_queen {
+  background-image: url(/hearts_queen.jpg);
+}
+.hearts_seven {
+  background-image: url(/hearts_seven.jpg);
+}
+.hearts_six {
+  background-image: url(/hearts_six.jpg);
+}
+.hearts_ten {
+  background-image: url(/hearts_ten.jpg);
+}
+.hearts_three {
+  background-image: url(/hearts_three.jpg);
+}
+.hearts_two {
+  background-image: url(/hearts_two.jpg);
+}
+.spades_ace {
+  background-image: url(/spades_ace.jpg);
+}
+.spades_eight {
+  background-image: url(/spades_eight.jpg);
+}
+.spades_five {
+  background-image: url(/spades_five.jpg);
+}
+.spades_four {
+  background-image: url(/spades_four.jpg);
+}
+.spades_jack {
+  background-image: url(/spades_jack.jpg);
+}
+.spades_king {
+  background-image: url(/spades_king.jpg);
+}
+.spades_nine {
+  background-image: url(/spades_nine.jpg);
+}
+.spades_queen {
+  background-image: url(/spades_queen.jpg);
+}
+.spades_seven {
+  background-image: url(/spades_seven.jpg);
+}
+.spades_six {
+  background-image: url(/spades_six.jpg);
+}
+.spades_ten {
+  background-image: url(/spades_ten.jpg);
+}
+.spades_three {
+  background-image: url(/spades_three.jpg);
+}
+.spades_two {
+  background-image: url(/spades_two.jpg);
 }

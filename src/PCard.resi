@@ -21,8 +21,8 @@ type rank =
 type view = {
   suit: suit,
   rank: rank,
-  symbol: string,
-  value: (int, string),
+  value: int,
+  bgclass: string,
 }
 let make: (suit, rank) => t
 let view: t => view

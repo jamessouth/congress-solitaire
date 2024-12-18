@@ -164,19 +164,7 @@ let make = () => {
         }
       | None => ""
       }
-    | false =>
-      switch tgt["parentElement"]["nodeName"] == "DIV" {
-      | true =>
-        switch tgt["parentElement"]["classList"][0] {
-        | Some(class) =>
-          switch String.startsWith(class, "x") {
-          | true => class
-          | false => ""
-          }
-        | None => ""
-        }
-      | false => ""
-      }
+    | false => ""
     }
     Console.log(cell)
 
@@ -258,7 +246,7 @@ let make = () => {
         </span>
       </CardOutline>
       {switch Null.toOption(Stack.peek(discard)) {
-      | Some(card) => <Card card gridArea="x99" cls="rotate-110" isSelected={moveQueue == "x99"} />
+      | Some(card) => <Card card gridArea="x99" isSelected={moveQueue == "x99"} />
       | None => React.null
       }}
     </div>

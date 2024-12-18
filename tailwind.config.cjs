@@ -20,6 +20,7 @@ module.exports = {
         cutive: 'Cutive, serif',
       },
       rotate: {
+        70: '70deg',
         110: '110deg',
       },
     },
