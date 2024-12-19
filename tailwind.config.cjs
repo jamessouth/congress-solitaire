@@ -10,11 +10,11 @@ module.exports = {
         cardback: 'url(/cardback.jpg)',
       },
       boxShadow: {
-        rules: '0 0 100px 70px #31373d',
+        rules: '0 0 100px 70px #2f2d36',
       },
       colors: {
-        cardBlack: '#31373d',
-        cardRed: '#be1931',
+        cardBlack: '#2f2d36',
+        cardRed: '#ca563d',
       },
       fontFamily: {
         cutive: 'Cutive, serif',

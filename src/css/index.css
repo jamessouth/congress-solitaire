@@ -115,19 +115,6 @@ main > div:last-child {
 .xx7 {
   grid-area: xx7;
 }
-/* .card {
-  grid-template-columns: 3% 16% 1fr 16% 3%;
-  grid-template-rows: 5% 12% 12% 1fr 12% 12% 5%;
-}
-@media (max-height: 600px) {
-  .card {
-    font-size: small;
-    p:nth-child(5) {
-      font-size: 3rem;
-    }
-  }
-} */
-
 .clubs_ace {
   background-image: url(/clubs_ace.jpg);
 }
@@ -283,4 +270,28 @@ main > div:last-child {
 }
 .spades_two {
   background-image: url(/spades_two.jpg);
+}
+.b0 {
+  background-image: url(/0.jpg);
+}
+.b1 {
+  background-image: url(/1.jpg);
+}
+.b2 {
+  background-image: url(/2.jpg);
+}
+.b3 {
+  background-image: url(/3.jpg);
+}
+.b4 {
+  background-image: url(/4.jpg);
+}
+.b5 {
+  background-image: url(/5.jpg);
+}
+.b6 {
+  background-image: url(/6.jpg);
+}
+.b7 {
+  background-image: url(/7.jpg);
 }

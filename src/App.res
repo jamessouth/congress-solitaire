@@ -129,6 +129,7 @@ let initialState: Reducer.state = {
   discard: Stack.make(),
 }
 let htp = "HOW TO PLAY"
+let modalBGRand = "b" ++ Int.toString(Int.mod(Float.toInt(Math.random() *. 10.0), 8))
 
 @react.component
 let make = () => {
@@ -175,24 +176,11 @@ let make = () => {
   }
 
   <main className="h-full flex justify-evenly">
-    <div className=" aspect-9/16 h-full grid gap-2 py-1" onClick={e => onGameClick(e)}>
+    <div className=" aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
       <Game tableau foundations moveQueue />
     </div>
     {switch modalOpen {
-    | true =>
-      <div
-        className="bg-red-200 text-cardBlack absolute inset-y-1/4 rounded-lg font-serif text-lg h-72 w-48 p-2 shadow-rules">
-        <button
-          className="float-right text-xl font-cutive"
-          onClick={_ => {
-            setModalOpen(_ => false)
-          }}>
-          {React.string("X")}
-        </button>
-        {React.string(
-          "aosi aiao; oiaj a a;oij aoj oij ao  oij;aoj f;aij;oaij ;fioi oai ;a faioaiu hoiuh goaiuh",
-        )}
-      </div>
+    | true => <Modal modalBGRand setModalOpen />
     | false => React.null
     }}
     <div
