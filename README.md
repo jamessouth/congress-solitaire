@@ -9,3 +9,5 @@
 #### Image credits:
 
 The card images are in the public domain and are from a [French-suited](https://en.wikipedia.org/wiki/French-suited_playing_cards) deck of cards called "Tarot Allemand" by BP Grimaud, Paris, France, 1898. Compared to standard 52-card decks, [tarot decks](https://en.wikipedia.org/wiki/Tarot) have 26 additional cards (the Fool, four Knights, and a suit of 21 trump cards), but they are not used here. Additionally, instead of aces there are just "one" cards. Images downloaded from [Bibliothèque nationale de France.](https://gallica.bnf.fr/ark:/12148/btv1b10510159t)
+
+The background is a public domain image of Claude Monet's [_The Houses of Parliament, Sunset_](https://commons.wikimedia.org/wiki/File:Claude_Monet_-_The_Houses_of_Parliament,_Sunset.jpg), one of a [series](<https://en.wikipedia.org/wiki/Houses_of_Parliament_(Monet_series)>) painted in the early 1900s.

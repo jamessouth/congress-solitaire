@@ -190,7 +190,7 @@ let make = () => {
       | false => _ => ()
       }}>
       <button
-        className={`stbtn pt-0.5 h-24 w-28 bg-yellow-200 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
+        className={`stbtn pt-0.5 h-24 w-28 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
         onClick={_ => {
           switch startBtnText == htp {
           | true => setModalOpen(_ => true)
@@ -203,7 +203,7 @@ let make = () => {
       </button>
       <CardOutline
         gridArea="deck"
-        cls={"dotted rotate-110 relative bg-contain select-none " ++
+        cls={"dotted rotate-110 relative bg-contain select-none outline-2 " ++
         switch gameStarted {
         | true => "cursor-pointer "
         | false => "cursor-not-allowed "
@@ -217,19 +217,19 @@ let make = () => {
         | false => _ => ()
         }}>
         <span
-          className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
+          className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[4.5rem] -ml-14">
           {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
         </span>
       </CardOutline>
       <CardOutline
         gridArea="x99"
-        cls={"dotted rotate-110 relative select-none " ++
+        cls={"dotted rotate-110 relative select-none outline-2 " ++
         switch gameStarted {
         | true => "cursor-pointer"
         | false => "cursor-not-allowed"
         }}>
         <span
-          className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardBlack mt-[4.5rem] -ml-14">
+          className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[4.5rem] -ml-14">
           {React.string(`discard - ${Int.toString(Stack.getSize(discard))}`)}
         </span>
       </CardOutline>

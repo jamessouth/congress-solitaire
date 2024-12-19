@@ -13,12 +13,12 @@
   border-width: 0;
 }
 main > div:first-child {
-  background: linear-gradient(
+  /* background: linear-gradient(
     to right,
     #3ecc16 22%,
     #2c7c0f 27% 73%,
     #3ecc16 78%
-  );
+  ); */
   grid-template-areas:
     'x0 xx0 xx1 x1'
     'x2 xx2 xx3 x3'
@@ -46,6 +46,7 @@ main > div:last-child {
 }
 .stbtn {
   grid-area: stbtn;
+  text-shadow: 1px 1px 3px #f4cd6fde;
 }
 .deck {
   grid-area: deck;

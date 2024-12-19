@@ -7,14 +7,16 @@ module.exports = {
         '9/16': '9 / 16',
       },
       backgroundImage: {
+        bg: 'url(/bg.jpg)',
         cardback: 'url(/cardback.jpg)',
       },
-      boxShadow: {
-        rules: '0 0 100px 70px #2f2d36',
-      },
+      //   boxShadow: {
+      //     rules: '0 0 100px 70px #2f2d36',
+      //   },
       colors: {
         cardBlack: '#2f2d36',
         cardRed: '#ca563d',
+        cardWhite: '#e2e2d6',
       },
       fontFamily: {
         cutive: 'Cutive, serif',
