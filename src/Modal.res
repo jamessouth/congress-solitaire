@@ -14,12 +14,12 @@ let make = (~modalBGRand, ~setModalOpen) => {
       <h2 className="font-bold mb-4 text-center">
         <span> {React.string("CONGRESS")} </span>
         {React.string(
-          " is a solitaire game that uses two decks of cards. To win, build up suits from Ace to King on the foundations (the center columns).",
+          " is a solitaire game that uses two decks of cards. To win, build up suits from ace to king on the foundations (the center columns).",
         )}
       </h2>
       <p className="text-center">
         {React.string(
-          "Move Aces to a foundation to begin a stack. Build them up by suit to King. Build down in any suit on the tableau (outer columns). Cards may be moved among tableau stacks to free up spots. Deal additional cards and begin new tableau stacks from the discard pile.",
+          "Select a card, then a destination. Move aces to a foundation to begin a stack. Build them up by suit to king. Build down in any suit on the tableau (outer columns). Cards may be moved among tableau stacks to free up spots. Deal additional cards and begin new tableau stacks from the discard pile.",
         )}
       </p>
     </div>

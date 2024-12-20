@@ -40,13 +40,12 @@ main > div:last-child {
     '.'
     '.'
     '.'
-    '.'
     'deck'
     'x99';
 }
 .stbtn {
   grid-area: stbtn;
-  text-shadow: 1px 1px 3px #f4cd6fde;
+  text-shadow: 1px 1px 3px #e9ce98, -1px -1px 1px #b63326;
 }
 .deck {
   grid-area: deck;

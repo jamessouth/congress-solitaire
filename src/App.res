@@ -175,68 +175,76 @@ let make = () => {
     }
   }
 
-  <main className="h-full flex justify-evenly">
-    <div className=" aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
-      <Game tableau foundations moveQueue />
-    </div>
-    {switch modalOpen {
-    | true => <Modal modalBGRand setModalOpen />
-    | false => React.null
-    }}
-    <div
-      className="grid h-full "
-      onClick={switch gameStarted {
-      | true => e => onGameClick(e)
-      | false => _ => ()
-      }}>
-      <button
-        className={`stbtn pt-0.5 h-24 w-28 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
-        onClick={_ => {
-          switch startBtnText == htp {
-          | true => setModalOpen(_ => true)
-          | false => ()
-          }
-          setStartBtnText(_ => htp)
-          setStartBtnColor(_ => "text-cardRed")
-        }}>
-        {React.string(startBtnText)}
-      </button>
-      <CardOutline
-        gridArea="deck"
-        cls={"dotted rotate-110 relative bg-contain select-none outline-2 " ++
-        switch gameStarted {
-        | true => "cursor-pointer "
-        | false => "cursor-not-allowed "
-        } ++
-        switch Array.length(deck) == 0 {
-        | true => ""
-        | false => "bg-cardback"
-        }}
+  <>
+    <main className="h-full flex justify-evenly portrait:hidden">
+      <div className=" aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
+        <Game tableau foundations moveQueue />
+      </div>
+      {switch modalOpen {
+      | true => <Modal modalBGRand setModalOpen />
+      | false => React.null
+      }}
+      <div
+        className="grid h-full "
         onClick={switch gameStarted {
-        | true => _ => dispatch(DealOne)
+        | true => e => onGameClick(e)
         | false => _ => ()
         }}>
-        <span
-          className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[4.5rem] -ml-14">
-          {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
-        </span>
-      </CardOutline>
-      <CardOutline
-        gridArea="x99"
-        cls={"dotted rotate-110 relative select-none outline-2 " ++
-        switch gameStarted {
-        | true => "cursor-pointer"
-        | false => "cursor-not-allowed"
-        }}>
-        <span
-          className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[4.5rem] -ml-14">
-          {React.string(`discard - ${Int.toString(Stack.getSize(discard))}`)}
-        </span>
-      </CardOutline>
-      {switch Null.toOption(Stack.peek(discard)) {
-      | Some(card) => <Card card gridArea="x99" isSelected={moveQueue == "x99"} />
-      | None => React.null
-      }}
-    </div>
-  </main>
+        <button
+          className={`stbtn pt-0.5 h-24 w-28 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
+          onClick={_ => {
+            switch startBtnText == htp {
+            | true => setModalOpen(_ => true)
+            | false => ()
+            }
+            setStartBtnText(_ => htp)
+            setStartBtnColor(_ => "text-cardRed")
+          }}>
+          {React.string(startBtnText)}
+        </button>
+        <CardOutline
+          gridArea="deck"
+          cls={"outline-dotted rotate-110 relative bg-contain select-none outline-2 " ++
+          switch gameStarted {
+          | true => "cursor-pointer "
+          | false => "cursor-not-allowed "
+          } ++
+          switch Array.length(deck) == 0 {
+          | true => ""
+          | false => "bg-cardback"
+          }}
+          onClick={switch gameStarted {
+          | true => _ => dispatch(DealOne)
+          | false => _ => ()
+          }}>
+          <span
+            className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[9.5vh] -ml-14">
+            {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
+          </span>
+        </CardOutline>
+        <CardOutline
+          gridArea="x99"
+          cls={"outline-dotted rotate-110 relative select-none outline-2 " ++
+          switch gameStarted {
+          | true => "cursor-pointer"
+          | false => "cursor-not-allowed"
+          }}>
+          <span
+            className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[9.5vh] -ml-14">
+            {React.string(`discard - ${Int.toString(Stack.getSize(discard))}`)}
+          </span>
+        </CardOutline>
+        {switch Null.toOption(Stack.peek(discard)) {
+        | Some(card) => <Card card gridArea="x99" isSelected={moveQueue == "x99"} />
+        | None => React.null
+        }}
+      </div>
+    </main>
+    <main className="landscape:hidden">
+      <p className="text-center text-xl">
+        {React.string("Portrait orientation not supported. Please rotate your
+      device to landscape orientation.")}
+      </p>
+    </main>
+  </>
 }
