@@ -129,7 +129,9 @@ let initialState: Reducer.state = {
   discard: Stack.make(),
 }
 let htp = "HOW TO PLAY"
-let modalBGRand = "b" ++ Int.toString(Int.mod(Float.toInt(Math.random() *. 10.0), 8))
+let rand = Int.mod(Float.toInt(Math.random() *. 10.0), 8)
+let extraMargin = Int.mod(rand, 2) == 1
+let modalClass = "b" ++ Int.toString(rand)
 
 @react.component
 let make = () => {
@@ -181,7 +183,7 @@ let make = () => {
         <Game tableau foundations moveQueue />
       </div>
       {switch modalOpen {
-      | true => <Modal modalBGRand setModalOpen />
+      | true => <Modal modalClass extraMargin setModalOpen />
       | false => React.null
       }}
       <div

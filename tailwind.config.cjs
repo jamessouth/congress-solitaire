@@ -10,9 +10,9 @@ module.exports = {
         bg: 'url(/bg.jpg)',
         cardback: 'url(/cardback.jpg)',
       },
-      //   boxShadow: {
-      //     rules: '0 0 100px 70px #2f2d36',
-      //   },
+      boxShadow: {
+        card: '0px 0px 7px 7px #ca563d',
+      },
       colors: {
         cardBlack: '#2f2d36',
         cardRed: '#ca563d',
