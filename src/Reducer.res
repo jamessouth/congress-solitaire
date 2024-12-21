@@ -1,7 +1,5 @@
 @val external parseInt: string => int = "parseInt"
-
-@send
-external splice: (array<'a>, ~start: int, ~remove: int) => array<'a> = "splice"
+@send external splice: (array<'a>, ~start: int, ~remove: int) => array<'a> = "splice"
 
 type state = {
   deck: array<PCard.t>,
@@ -14,6 +12,7 @@ type state = {
 type action =
   | DealEight
   | DealOne
+  | ClearMoveQueue
   | AddMoveSource(string)
   | MoveCard(string)
 
@@ -50,6 +49,11 @@ let reducer = (state, action) => {
     | None => state
     }
 
+  | ClearMoveQueue => {
+      ...state,
+      moveQueue: "",
+    }
+
   | AddMoveSource(cell) =>
     switch cell != "" {
     | true =>
@@ -69,7 +73,8 @@ let reducer = (state, action) => {
                   moveQueue: cell,
                 }
               }
-            | false => switch Stack.isEmpty(Array.getUnsafe(state.tableau, sourceCellInd)) {
+            | false =>
+              switch Stack.isEmpty(Array.getUnsafe(state.tableau, sourceCellInd)) {
               | true => state
               | false => {
                   ...state,

@@ -157,29 +157,32 @@ let make = () => {
 
   let onGameClick = e => {
     let tgt = ReactEvent.Mouse.target(e)
-    let cell = switch tgt["nodeName"] == "DIV" {
+    switch tgt["nodeName"] == "DIV" {
     | true =>
       switch tgt["classList"][0] {
       | Some(class) =>
-        switch String.startsWith(class, "x") {
-        | true => class
-        | false => ""
+        switch String.get(class, 0) {
+        | None => Console.log("empty class name")
+        | Some(c) =>
+          switch (c, String.length(moveQueue) == 0) {
+          | ("s", true) => dispatch(AddMoveSource(class))
+          | ("s", false) => dispatch(ClearMoveQueue)
+          | ("d", true) => Console.log("not a source cell: " ++ class)
+          | ("d", false) => dispatch(MoveCard(class))
+          | ("x", true) => dispatch(AddMoveSource(class))
+          | ("x", false) => dispatch(MoveCard(class))
+          | (_, _) => Console.log("other class: " ++ class)
+          }
         }
-      | None => ""
+      | None => Console.log("no class")
       }
-    | false => ""
-    }
-    Console.log(cell)
-
-    switch String.length(moveQueue) == 0 {
-    | true => dispatch(AddMoveSource(cell))
-    | false => dispatch(MoveCard(cell))
+    | false => dispatch(ClearMoveQueue)
     }
   }
 
   <>
     <main className="h-full flex justify-evenly portrait:hidden">
-      <div className=" aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
+      <div className="aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
         <Game tableau foundations moveQueue />
       </div>
       {switch modalOpen {
@@ -193,7 +196,7 @@ let make = () => {
         | false => _ => ()
         }}>
         <button
-          className={`stbtn pt-0.5 h-24 w-28 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
+          className={`_stbtn pt-0.5 h-24 w-28 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
           onClick={_ => {
             switch startBtnText == htp {
             | true => setModalOpen(_ => true)
@@ -205,7 +208,7 @@ let make = () => {
           {React.string(startBtnText)}
         </button>
         <CardOutline
-          gridArea="deck"
+          gridArea="_deck"
           cls={"outline-dotted rotate-110 relative bg-contain select-none outline-2 " ++
           switch gameStarted {
           | true => "cursor-pointer "
@@ -220,24 +223,24 @@ let make = () => {
           | false => _ => ()
           }}>
           <span
-            className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[9.5vh] -ml-14">
+            className="absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[9.5vh] -ml-14">
             {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
           </span>
         </CardOutline>
         <CardOutline
-          gridArea="x99"
+          gridArea="s99"
           cls={"outline-dotted rotate-110 relative select-none outline-2 " ++
           switch gameStarted {
           | true => "cursor-pointer"
           | false => "cursor-not-allowed"
           }}>
           <span
-            className=" absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[9.5vh] -ml-14">
+            className="absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[9.5vh] -ml-14">
             {React.string(`discard - ${Int.toString(Stack.getSize(discard))}`)}
           </span>
         </CardOutline>
         {switch Null.toOption(Stack.peek(discard)) {
-        | Some(card) => <Card card gridArea="x99" isSelected={moveQueue == "x99"} />
+        | Some(card) => <Card card gridArea="s99" isSelected={moveQueue == "s99"} />
         | None => React.null
         }}
       </div>

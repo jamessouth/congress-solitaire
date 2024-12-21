@@ -5,27 +5,27 @@ let make = (~tableau, ~foundations, ~moveQueue) => {
       Array.map(
         [
           "x0",
-          "xx0",
-          "xx1",
+          "d0",
+          "d1",
           "x1",
           "x2",
-          "xx2",
-          "xx3",
+          "d2",
+          "d3",
           "x3",
           "x4",
-          "xx4",
-          "xx5",
+          "d4",
+          "d5",
           "x5",
           "x6",
-          "xx6",
-          "xx7",
+          "d6",
+          "d7",
           "x7",
         ],
         gridArea =>
           <CardOutline
             key=gridArea
             gridArea
-            cls={switch String.startsWith(gridArea, "xx") {
+            cls={switch String.startsWith(gridArea, "d") {
             | true => "solid"
             | false => "dashed"
             }}
@@ -43,7 +43,7 @@ let make = (~tableau, ~foundations, ~moveQueue) => {
     )}
     {React.array(
       Array.mapWithIndex(foundations, (card, i) => {
-        let gridArea = "xx" ++ Int.toString(i)
+        let gridArea = "d" ++ Int.toString(i)
         switch Null.toOption(card) {
         | Some(card) => <Card key=gridArea card gridArea isSelected=false />
         | None => React.null

@@ -19,20 +19,20 @@ main > div:first-child {
     #2c7c0f 27% 73%,
     #3ecc16 78%
   ); */
-  grid-template-areas:
-    'x0 xx0 xx1 x1'
-    'x2 xx2 xx3 x3'
-    'x4 xx4 xx5 x5'
-    'x6 xx6 xx7 x7';
+  grid-template-areas:/* s for source, d for dest, x for both */
+    'x0 d0 d1 x1'
+    'x2 d2 d3 x3'
+    'x4 d4 d5 x5'
+    'x6 d6 d7 x7';
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 main > div:last-child {
-  grid-template-areas:
+  grid-template-areas:/* s for source, d for dest, x for both */
     '.'
     '.'
     '.'
-    'stbtn'
+    '_stbtn'
     '.'
     '.'
     '.'
@@ -40,19 +40,19 @@ main > div:last-child {
     '.'
     '.'
     '.'
-    'deck'
-    'x99';
+    '_deck'
+    's99';
 }
-.stbtn {
-  grid-area: stbtn;
+._stbtn {
+  grid-area: _stbtn;
   text-shadow: 1px 1px 3px #e9ce98, -1px -1px 1px #b63326;
 }
-.deck {
-  grid-area: deck;
+._deck {
+  grid-area: _deck;
   height: 25vh;
 }
-.x99 {
-  grid-area: x99;
+.s99 {
+  grid-area: s99;
   height: 25vh;
 }
 .dashed {
@@ -91,29 +91,29 @@ main > div:last-child {
 .x7 {
   grid-area: x7;
 }
-.xx0 {
-  grid-area: xx0;
+.d0 {
+  grid-area: d0;
 }
-.xx1 {
-  grid-area: xx1;
+.d1 {
+  grid-area: d1;
 }
-.xx2 {
-  grid-area: xx2;
+.d2 {
+  grid-area: d2;
 }
-.xx3 {
-  grid-area: xx3;
+.d3 {
+  grid-area: d3;
 }
-.xx4 {
-  grid-area: xx4;
+.d4 {
+  grid-area: d4;
 }
-.xx5 {
-  grid-area: xx5;
+.d5 {
+  grid-area: d5;
 }
-.xx6 {
-  grid-area: xx6;
+.d6 {
+  grid-area: d6;
 }
-.xx7 {
-  grid-area: xx7;
+.d7 {
+  grid-area: d7;
 }
 .clubs_ace {
   background-image: url(/clubs_ace.jpg);
