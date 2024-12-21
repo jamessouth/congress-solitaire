@@ -55,72 +55,49 @@ let reducer = (state, action) => {
     }
 
   | AddMoveSource(cell) =>
-    switch cell != "" {
+    let res = {
+      ...state,
+      moveQueue: cell,
+    }
+    switch String.startsWith(cell, "x") {
     | true =>
-      switch String.startsWith(cell, "xx") {
+      switch Stack.isEmpty(
+        Array.getUnsafe(state.tableau, parseInt(String.sliceToEnd(cell, ~start=1))),
+      ) {
       | true => state
-      | false =>
-        switch String.startsWith(cell, "x") {
-        | false => state
-        | true => {
-            let sourceCellInd = parseInt(String.sliceToEnd(cell, ~start=1))
-            switch sourceCellInd == 99 {
-            | true =>
-              switch Stack.isEmpty(state.discard) {
-              | true => state
-              | false => {
-                  ...state,
-                  moveQueue: cell,
-                }
-              }
-            | false =>
-              switch Stack.isEmpty(Array.getUnsafe(state.tableau, sourceCellInd)) {
-              | true => state
-              | false => {
-                  ...state,
-                  moveQueue: cell,
-                }
-              }
-            }
-          }
-        }
+      | false => res
       }
-    | false => state
+    | false =>
+      switch Stack.isEmpty(state.discard) {
+      | true => state
+      | false => res
+      }
     }
 
   | MoveCard(cell) =>
-    switch (cell != "", state.moveQueue == cell) {
-    | (true, true) => {
+    switch state.moveQueue == cell {
+    | true => {
         ...state,
         moveQueue: "",
       }
-    | (true, false) => {
-        let sourceCellInd = parseInt(String.sliceToEnd(state.moveQueue, ~start=1))
-        let destCellInd = switch String.startsWith(cell, "xx") {
-        | true => parseInt(String.sliceToEnd(cell, ~start=2))
-        | false => parseInt(String.sliceToEnd(cell, ~start=1))
+    | false => {
+        let destCellInd = parseInt(String.sliceToEnd(cell, ~start=1))
+        let card = switch state.moveQueue == "s0" {
+        | true => Stack.pop(state.discard)
+        | false =>
+          Stack.pop(
+            Array.getUnsafe(state.tableau, parseInt(String.sliceToEnd(state.moveQueue, ~start=1))),
+          )
         }
-
-        switch destCellInd == 99 {
-        | true => state
-        | false => {
-            let card = switch sourceCellInd == 99 {
-            | true => Stack.pop(state.discard)
-
-            | false => Stack.pop(Array.getUnsafe(state.tableau, sourceCellInd))
-            }
-
-            Stack.push(Array.getUnsafe(state.tableau, destCellInd), card)
-
-            {
-              ...state,
-              moveQueue: "",
-            }
-          }
+        switch String.startsWith(cell, "d") {
+        | true => state.foundations[destCellInd] = card
+        | false => Stack.push(Array.getUnsafe(state.tableau, destCellInd), card)
+        }
+        {
+          ...state,
+          moveQueue: "",
         }
       }
-
-    | (false, _) => state
     }
   }
 }

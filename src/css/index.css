@@ -41,7 +41,7 @@ main > div:last-child {
     '.'
     '.'
     '_deck'
-    's99';
+    's0';
 }
 ._stbtn {
   grid-area: _stbtn;
@@ -51,8 +51,8 @@ main > div:last-child {
   grid-area: _deck;
   height: 25vh;
 }
-.s99 {
-  grid-area: s99;
+.s0 {
+  grid-area: s0;
   height: 25vh;
 }
 .dashed {

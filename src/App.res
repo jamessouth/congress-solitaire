@@ -165,12 +165,10 @@ let make = () => {
         | None => Console.log("empty class name")
         | Some(c) =>
           switch (c, String.length(moveQueue) == 0) {
-          | ("s", true) => dispatch(AddMoveSource(class))
+          | ("s", true) | ("x", true) => dispatch(AddMoveSource(class))
+          | ("d", false) | ("x", false) => dispatch(MoveCard(class))
           | ("s", false) => dispatch(ClearMoveQueue)
           | ("d", true) => Console.log("not a source cell: " ++ class)
-          | ("d", false) => dispatch(MoveCard(class))
-          | ("x", true) => dispatch(AddMoveSource(class))
-          | ("x", false) => dispatch(MoveCard(class))
           | (_, _) => Console.log("other class: " ++ class)
           }
         }
@@ -228,7 +226,7 @@ let make = () => {
           </span>
         </CardOutline>
         <CardOutline
-          gridArea="s99"
+          gridArea="s0"
           cls={"outline-dotted rotate-110 relative select-none outline-2 " ++
           switch gameStarted {
           | true => "cursor-pointer"
@@ -240,7 +238,7 @@ let make = () => {
           </span>
         </CardOutline>
         {switch Null.toOption(Stack.peek(discard)) {
-        | Some(card) => <Card card gridArea="s99" isSelected={moveQueue == "s99"} />
+        | Some(card) => <Card card gridArea="s0" isSelected={moveQueue == "s0"} />
         | None => React.null
         }}
       </div>
