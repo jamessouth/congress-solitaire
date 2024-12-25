@@ -139,6 +139,7 @@ let make = () => {
   let (startBtnColor, setStartBtnColor) = React.useState(_ => "text-cardBlack")
   let (modalOpen, setModalOpen) = React.useState(_ => false)
   let (gameStarted, setGameStarted) = React.useState(_ => false)
+  let (bg, setBG) = React.useState(_ => "")
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
 
   let {deck, tableau, foundations, moveQueue, discard} = state
@@ -181,7 +182,7 @@ let make = () => {
   <>
     <main className="h-full flex justify-evenly portrait:hidden">
       <div className="aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
-        <Game tableau foundations moveQueue />
+        <Game tableau foundations moveQueue bg />
       </div>
       {switch modalOpen {
       | true => <Modal modalClass extraMargin setModalOpen />
@@ -205,6 +206,58 @@ let make = () => {
           }}>
           {React.string(startBtnText)}
         </button>
+        <div className="rad">
+          <form>
+            <fieldset>
+              <div>
+                <input
+                  onChange={e => {
+                    let val = ReactEvent.Form.target(e)["value"]
+                    setBG(_ => val)
+                  }}
+                  type_="radio"
+                  id="bg1"
+                  name="bkgd"
+                  value="gw"
+                />
+                <label htmlFor="bg1"> {React.string("gw")} </label>
+                <input
+                  onChange={e => {
+                    let val = ReactEvent.Form.target(e)["value"]
+                    setBG(_ => val)
+                  }}
+                  type_="radio"
+                  id="bg2"
+                  name="bkgd"
+                  value="gj"
+                />
+                <label htmlFor="bg2"> {React.string("gj")} </label>
+                <input
+                  onChange={e => {
+                    let val = ReactEvent.Form.target(e)["value"]
+                    setBG(_ => val)
+                  }}
+                  type_="radio"
+                  id="bg3"
+                  name="bkgd"
+                  value="bj"
+                />
+                <label htmlFor="bg3"> {React.string("bj")} </label>
+                <input
+                  onChange={e => {
+                    let val = ReactEvent.Form.target(e)["value"]
+                    setBG(_ => val)
+                  }}
+                  type_="radio"
+                  id="bg4"
+                  name="bkgd"
+                  value="bw"
+                />
+                <label htmlFor="bg4"> {React.string("bw")} </label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
         <CardOutline
           gridArea="_deck"
           cls={"outline-dotted rotate-110 relative bg-contain select-none outline-2 " ++
@@ -238,7 +291,7 @@ let make = () => {
           </span>
         </CardOutline>
         {switch Null.toOption(Stack.peek(discard)) {
-        | Some(card) => <Card card gridArea="s0" isSelected={moveQueue == "s0"} />
+        | Some(card) => <Card card gridArea="s0" isSelected={moveQueue == "s0"} bg />
         | None => React.null
         }}
       </div>
