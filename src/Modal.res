@@ -1,9 +1,11 @@
 @react.component
-let make = (~modalClass, ~extraMargin, ~setModalOpen) => {
+let make = (~setModalOpen) => {
+  //~extraMargin,~modalClass,
   <>
     <div className="absolute h-full w-full opacity-50 bg-cardBlack z-10" />
     <div
-      className={`${modalClass} bg-contain bg-no-repeat aspect-9/16 absolute z-20 top-[2%] bottom-[2%] rounded-[2.75rem] p-2 text-cardBlack font-cutive text-[2.25vh] flex flex-col justify-center`}>
+      // ${modalClass}
+      className={` bg-contain bg-no-repeat aspect-9/16 absolute z-20 top-[2%] bottom-[2%] rounded-[2.75rem] p-2 text-cardBlack font-cutive text-[2.25vh] flex flex-col justify-center`}>
       <button
         className="absolute top-[4%] right-[8%] text-[3.5vh]"
         onClick={_ => {
@@ -12,11 +14,13 @@ let make = (~modalClass, ~extraMargin, ~setModalOpen) => {
         {React.string("X")}
       </button>
       <h2
-        className={"font-bold mb-4 text-center " ++
-        switch extraMargin {
-        | true => "mt-4"
-        | false => ""
-        }}>
+        className={"font-bold mb-4 text-center "}
+        // ++
+        // switch extraMargin {
+        // | true => "mt-4"
+        // | false => ""
+        // }
+      >
         {React.string(
           "CONGRESS is a solitaire game that uses two decks of cards. To win, build up suits from ace to king on the foundations (the center columns).",
         )}

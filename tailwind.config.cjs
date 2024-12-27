@@ -8,7 +8,6 @@ module.exports = {
       },
       backgroundImage: {
         bg: 'url(/bg.jpg)',
-        cardback: 'url(/cardback.jpg)',
       },
       boxShadow: {
         card: '0px 0px 7px 7px #ca563d',

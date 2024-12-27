@@ -34,7 +34,7 @@ main > div:last-child {
     '.'
     '_stbtn'
     '.'
-    'rad'
+    '.'
     '.'
     '.'
     '.'
@@ -42,9 +42,6 @@ main > div:last-child {
     '.'
     '_deck'
     's0';
-}
-.rad {
-  grid-area: rad;
 }
 ._stbtn {
   grid-area: _stbtn;
@@ -119,193 +116,176 @@ main > div:last-child {
   grid-area: d7;
 }
 
-.gw {
-  background-image: url(/gw.webp);
-  background-size: 1300% 400%;
-}
-.gj {
-  background-image: url(/gj.jpg);
-  background-size: 1300% 400%;
-}
-.bj {
-  background-image: url(/bj.jpg);
-  background-size: 1300% 400%;
-}
-.bw {
-  background-image: url(/bw.webp);
-  background-size: 1300% 400%;
-}
-
+/* .gw {
+  background-image: url(/cards.webp);
+  background-size: 5300%;
+} */
+/* 100%; */
+/* 11232 */
+/* 100 * offsetX / (imageWidth - spriteWidth) */
 .clubs_ace {
-  background-position: calc(0% / 13) 0%;
+  background-position: 0 0;
+}
+.clubs_two {
+  background-position: calc(21600% / 11232) 0;
+}
+.clubs_three {
+  background-position: calc(43200% / 11232) 0;
+}
+.clubs_four {
+  background-position: calc(64800% / 11232) 0;
+}
+.clubs_five {
+  background-position: calc(86400% / 11232) 0;
+}
+.clubs_six {
+  background-position: calc(108000% / 11232) 0;
+}
+.clubs_seven {
+  background-position: calc(129600% / 11232) 0;
+}
+.clubs_eight {
+  background-position: calc(151200% / 11232) 0;
+}
+.clubs_nine {
+  background-position: calc(172800% / 11232) 0;
+}
+.clubs_ten {
+  background-position: calc(194400% / 11232) 0;
+}
+.clubs_jack {
+  background-position: calc(216000% / 11232) 0;
+}
+.clubs_queen {
+  background-position: calc(237600% / 11232) 0;
+}
+.clubs_king {
+  background-position: calc(259200% / 11232) 0;
 }
 .diamonds_ace {
-  background-position: calc(0% / 13) 34%;
-}
-.hearts_ace {
-  background-position: calc(0% / 13) 68%;
-}
-.spades_ace {
-  background-position: calc(0% / 13) 100%;
-}
-
-.clubs_two {
-  background-position: calc(108% / 13) 0%;
+  background-position: calc(280800% / 11232) 0;
 }
 .diamonds_two {
-  background-position: calc(108% / 13) 34%;
-}
-.hearts_two {
-  background-position: calc(108% / 13) 68%;
-}
-.spades_two {
-  background-position: calc(108% / 13) 100%;
-}
-
-.clubs_three {
-  background-position: calc(216% / 13) 0%;
+  background-position: calc(302400% / 11232) 0;
 }
 .diamonds_three {
-  background-position: calc(216% / 13) 34%;
-}
-.hearts_three {
-  background-position: calc(216% / 13) 68%;
-}
-.spades_three {
-  background-position: calc(216% / 13) 100%;
-}
-
-.clubs_four {
-  background-position: calc(324% / 13) 0%;
+  background-position: calc(324000% / 11232) 0;
 }
 .diamonds_four {
-  background-position: calc(324% / 13) 34%;
-}
-.hearts_four {
-  background-position: calc(324% / 13) 68%;
-}
-.spades_four {
-  background-position: calc(324% / 13) 100%;
-}
-
-.clubs_five {
-  background-position: calc(432% / 13) 0%;
+  background-position: calc(345600% / 11232) 0;
 }
 .diamonds_five {
-  background-position: calc(432% / 13) 34%;
-}
-.hearts_five {
-  background-position: calc(432% / 13) 68%;
-}
-.spades_five {
-  background-position: calc(432% / 13) 100%;
-}
-
-.clubs_six {
-  background-position: calc(540% / 13) 0%;
+  background-position: calc(367200% / 11232) 0;
 }
 .diamonds_six {
-  background-position: calc(540% / 13) 34%;
-}
-.hearts_six {
-  background-position: calc(540% / 13) 68%;
-}
-.spades_six {
-  background-position: calc(540% / 13) 100%;
-}
-
-.clubs_seven {
-  background-position: calc(648% / 13) 0%;
+  background-position: calc(388800% / 11232) 0;
 }
 .diamonds_seven {
-  background-position: calc(648% / 13) 34%;
-}
-.hearts_seven {
-  background-position: calc(648% / 13) 68%;
-}
-.spades_seven {
-  background-position: calc(648% / 13) 100%;
-}
-
-.clubs_eight {
-  background-position: calc(756% / 13) 0%;
+  background-position: calc(410400% / 11232) 0;
 }
 .diamonds_eight {
-  background-position: calc(756% / 13) 34%;
-}
-.hearts_eight {
-  background-position: calc(756% / 13) 68%;
-}
-.spades_eight {
-  background-position: calc(756% / 13) 100%;
-}
-
-.clubs_nine {
-  background-position: calc(864% / 13) 0%;
+  background-position: calc(432000% / 11232) 0;
 }
 .diamonds_nine {
-  background-position: calc(864% / 13) 34%;
-}
-.hearts_nine {
-  background-position: calc(864% / 13) 68%;
-}
-.spades_nine {
-  background-position: calc(864% / 13) 100%;
-}
-
-.clubs_ten {
-  background-position: calc(972% / 13) 0%;
+  background-position: calc(453600% / 11232) 0;
 }
 .diamonds_ten {
-  background-position: calc(972% / 13) 34%;
-}
-.hearts_ten {
-  background-position: calc(972% / 13) 68%;
-}
-.spades_ten {
-  background-position: calc(972% / 13) 100%;
-}
-
-.clubs_jack {
-  background-position: calc(1080% / 13) 0%;
+  background-position: calc(475200% / 11232) 0;
 }
 .diamonds_jack {
-  background-position: calc(1080% / 13) 34%;
-}
-.hearts_jack {
-  background-position: calc(1080% / 13) 68%;
-}
-.spades_jack {
-  background-position: calc(1080% / 13) 100%;
-}
-
-.clubs_queen {
-  background-position: calc(1188% / 13) 0%;
+  background-position: calc(496800% / 11232) 0;
 }
 .diamonds_queen {
-  background-position: calc(1188% / 13) 34%;
-}
-.hearts_queen {
-  background-position: calc(1188% / 13) 68%;
-}
-.spades_queen {
-  background-position: calc(1188% / 13) 100%;
-}
-
-.clubs_king {
-  background-position: calc(1296% / 13) 0%;
+  background-position: calc(518400% / 11232) 0;
 }
 .diamonds_king {
-  background-position: calc(1296% / 13) 34%;
+  background-position: calc(540000% / 11232) 0;
+}
+.hearts_ace {
+  background-position: calc(561600% / 11232) 0;
+}
+.hearts_two {
+  background-position: calc(583200% / 11232) 0;
+}
+.hearts_three {
+  background-position: calc(604800% / 11232) 0;
+}
+.hearts_four {
+  background-position: calc(626400% / 11232) 0;
+}
+.hearts_five {
+  background-position: calc(648000% / 11232) 0;
+}
+.hearts_six {
+  background-position: calc(669600% / 11232) 0;
+}
+.hearts_seven {
+  background-position: calc(691200% / 11232) 0;
+}
+.hearts_eight {
+  background-position: calc(712800% / 11232) 0;
+}
+.hearts_nine {
+  background-position: calc(734400% / 11232) 0;
+}
+.hearts_ten {
+  background-position: calc(756000% / 11232) 0;
+}
+.hearts_jack {
+  background-position: calc(777600% / 11232) 0;
+}
+.hearts_queen {
+  background-position: calc(799200% / 11232) 0;
 }
 .hearts_king {
-  background-position: calc(1296% / 13) 68%;
+  background-position: calc(820800% / 11232) 0;
+}
+.spades_ace {
+  background-position: calc(842400% / 11232) 0;
+}
+.spades_two {
+  background-position: calc(864000% / 11232) 0;
+}
+.spades_three {
+  background-position: calc(885600% / 11232) 0;
+}
+.spades_four {
+  background-position: calc(907200% / 11232) 0;
+}
+.spades_five {
+  background-position: calc(928800% / 11232) 0;
+}
+.spades_six {
+  background-position: calc(950400% / 11232) 0;
+}
+.spades_seven {
+  background-position: calc(972000% / 11232) 0;
+}
+.spades_eight {
+  background-position: calc(993600% / 11232) 0;
+}
+.spades_nine {
+  background-position: calc(1015200% / 11232) 0;
+}
+.spades_ten {
+  background-position: calc(1036800% / 11232) 0;
+}
+.spades_jack {
+  background-position: calc(1058400% / 11232) 0;
+}
+.spades_queen {
+  background-position: calc(1080000% / 11232) 0;
 }
 .spades_king {
-  background-position: calc(1296% / 13) 100%;
+  background-position: calc(1101600% / 11232) 0;
+}
+.cardback {
+  background-image: url(/cards.webp);
+  background-size: 5300%;
+  background-position: 100% 0;
 }
 
-.b0 {
+/* .b0 {
   background-image: url(/0.jpg);
 }
 .b1 {
@@ -328,4 +308,4 @@ main > div:last-child {
 }
 .b7 {
   background-image: url(/7.jpg);
-}
+} */

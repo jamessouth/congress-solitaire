@@ -5,7 +5,7 @@ let make = (~gridArea, ~cls, ~children=?, ~onClick=?) => {
     | Some(oc) => oc
     | None => _ => ()
     }}
-    className={`${gridArea} ${cls} aspect-9/16 outline-cardBlack rounded-lg   `}>
+    className={`${gridArea} ${cls} gw aspect-9/16 outline-cardBlack rounded-lg   `}>
     {switch children {
     | Some(el) => el
     | None => React.null
