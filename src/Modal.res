@@ -1,11 +1,10 @@
 @react.component
-let make = (~setModalOpen) => {
-  //~extraMargin,~modalClass,
+let make = (~setModalOpen, ~modalClass) => {
+  //~extraMargin
   <>
     <div className="absolute h-full w-full opacity-50 bg-cardBlack z-10" />
     <div
-      // ${modalClass}
-      className={` bg-contain bg-no-repeat aspect-9/16 absolute z-20 top-[2%] bottom-[2%] rounded-[2.75rem] p-2 text-cardBlack font-cutive text-[2.25vh] flex flex-col justify-center`}>
+      className={`${modalClass} bg-[url(/cards.webp)] bg-[percentage:5300%] bg-no-repeat aspect-9/16 absolute z-20 top-[2%] bottom-[2%] rounded-[2.75rem] p-2 text-cardBlack font-cutive text-[2.25vh] flex flex-col justify-center`}>
       <button
         className="absolute top-[4%] right-[8%] text-[3.5vh]"
         onClick={_ => {

@@ -19,16 +19,16 @@ main > div:first-child {
     #2c7c0f 27% 73%,
     #3ecc16 78%
   ); */
-  grid-template-areas:/* s for source, d for dest, x for both */
-    'x0 d0 d1 x1'
-    'x2 d2 d3 x3'
-    'x4 d4 d5 x5'
-    'x6 d6 d7 x7';
+  grid-template-areas:/* s for source, d for dest, b for both */
+    'b0 d0 d1 b1'
+    'b2 d2 d3 b3'
+    'b4 d4 d5 b5'
+    'b6 d6 d7 b7';
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 main > div:last-child {
-  grid-template-areas:/* s for source, d for dest, x for both */
+  grid-template-areas:/* s for source, d for dest, b for both */
     '.'
     '.'
     '.'
@@ -67,29 +67,29 @@ main > div:last-child {
   outline-style: dotted;
   outline-width: 1px;
 }
-.x0 {
-  grid-area: x0;
+.b0 {
+  grid-area: b0;
 }
-.x1 {
-  grid-area: x1;
+.b1 {
+  grid-area: b1;
 }
-.x2 {
-  grid-area: x2;
+.b2 {
+  grid-area: b2;
 }
-.x3 {
-  grid-area: x3;
+.b3 {
+  grid-area: b3;
 }
-.x4 {
-  grid-area: x4;
+.b4 {
+  grid-area: b4;
 }
-.x5 {
-  grid-area: x5;
+.b5 {
+  grid-area: b5;
 }
-.x6 {
-  grid-area: x6;
+.b6 {
+  grid-area: b6;
 }
-.x7 {
-  grid-area: x7;
+.b7 {
+  grid-area: b7;
 }
 .d0 {
   grid-area: d0;
@@ -115,14 +115,6 @@ main > div:last-child {
 .d7 {
   grid-area: d7;
 }
-
-/* .gw {
-  background-image: url(/cards.webp);
-  background-size: 5300%;
-} */
-/* 100%; */
-/* 11232 */
-/* 100 * offsetX / (imageWidth - spriteWidth) */
 .clubs_ace {
   background-position: 0 0;
 }
@@ -279,33 +271,3 @@ main > div:last-child {
 .spades_king {
   background-position: calc(1101600% / 11232) 0;
 }
-.cardback {
-  background-image: url(/cards.webp);
-  background-size: 5300%;
-  background-position: 100% 0;
-}
-
-/* .b0 {
-  background-image: url(/0.jpg);
-}
-.b1 {
-  background-image: url(/1.jpg);
-}
-.b2 {
-  background-image: url(/2.jpg);
-}
-.b3 {
-  background-image: url(/3.jpg);
-}
-.b4 {
-  background-image: url(/4.jpg);
-}
-.b5 {
-  background-image: url(/5.jpg);
-}
-.b6 {
-  background-image: url(/6.jpg);
-}
-.b7 {
-  background-image: url(/7.jpg);
-} */

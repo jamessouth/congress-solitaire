@@ -4,22 +4,22 @@ let make = (~tableau, ~foundations, ~moveQueue) => {
     {React.array(
       Array.map(
         [
-          "x0",
+          "b0",
           "d0",
           "d1",
-          "x1",
-          "x2",
+          "b1",
+          "b2",
           "d2",
           "d3",
-          "x3",
-          "x4",
+          "b3",
+          "b4",
           "d4",
           "d5",
-          "x5",
-          "x6",
+          "b5",
+          "b6",
           "d6",
           "d7",
-          "x7",
+          "b7",
         ],
         gridArea =>
           <CardOutline
@@ -34,7 +34,7 @@ let make = (~tableau, ~foundations, ~moveQueue) => {
     )}
     {React.array(
       Array.mapWithIndex(tableau, (stack, i) => {
-        let gridArea = "x" ++ Int.toString(i)
+        let gridArea = "b" ++ Int.toString(i)
         switch Null.toOption(Stack.peek(stack)) {
         | Some(card) => <Card key=gridArea card gridArea isSelected={moveQueue == gridArea} />
         | None => React.null

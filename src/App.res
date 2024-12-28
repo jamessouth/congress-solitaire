@@ -129,9 +129,27 @@ let initialState: Reducer.state = {
   discard: Stack.make(),
 }
 let htp = "HOW TO PLAY"
-// let rand = Int.mod(Float.toInt(Math.random() *. 10.0), 52)
+let suits = ["diamonds", "clubs", "hearts", "spades"]
+let ranks = [
+  "ace",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+  "jack",
+  "queen",
+  "king",
+]
+
+let suitRand = Int.mod(Float.toInt(Math.random() *. 100.0), 4)
+let rankRand = Int.mod(Float.toInt(Math.random() *. 100.0), 13)
 // let extraMargin = Int.mod(rand, 2) == 1
-// let modalClass = "b" ++ Int.toString(rand)
+let modalClass = Array.getUnsafe(suits, suitRand) ++ "_" ++ Array.getUnsafe(ranks, rankRand)
 
 @react.component
 let make = () => {
@@ -165,8 +183,8 @@ let make = () => {
         | None => Console.log("empty class name")
         | Some(c) =>
           switch (c, String.length(moveQueue) == 0) {
-          | ("s", true) | ("x", true) => dispatch(AddMoveSource(class))
-          | ("d", false) | ("x", false) => dispatch(MoveCard(class))
+          | ("s", true) | ("b", true) => dispatch(AddMoveSource(class))
+          | ("d", false) | ("b", false) => dispatch(MoveCard(class))
           | ("s", false) => dispatch(ClearMoveQueue)
           | ("d", true) => Console.log("not a source cell: " ++ class)
           | (_, _) => Console.log("other class: " ++ class)
@@ -184,8 +202,8 @@ let make = () => {
         <Game tableau foundations moveQueue />
       </div>
       {switch modalOpen {
-      // extraMargin modalClass
-      | true => <Modal setModalOpen />
+      // extraMargin
+      | true => <Modal setModalOpen modalClass />
       | false => React.null
       }}
       <div
@@ -208,14 +226,14 @@ let make = () => {
         </button>
         <CardOutline
           gridArea="_deck"
-          cls={"outline-dotted rotate-110 relative bg-contain select-none outline-2 " ++
+          cls={"outline-dotted rotate-110 relative select-none outline-2 " ++
           switch gameStarted {
           | true => "cursor-pointer "
           | false => "cursor-not-allowed "
           } ++
           switch Array.length(deck) == 0 {
           | true => ""
-          | false => "cardback"
+          | false => "bg-[url(/cards.webp)] bg-[percentage:5300%] bg-[100%_0]"
           }}
           onClick={switch gameStarted {
           | true => _ => dispatch(DealOne)

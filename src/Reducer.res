@@ -59,7 +59,7 @@ let reducer = (state, action) => {
       ...state,
       moveQueue: cell,
     }
-    switch String.startsWith(cell, "x") {
+    switch String.startsWith(cell, "b") {
     | true =>
       switch Stack.isEmpty(
         Array.getUnsafe(state.tableau, parseInt(String.sliceToEnd(cell, ~start=1))),
