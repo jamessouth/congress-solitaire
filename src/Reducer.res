@@ -25,6 +25,10 @@ let init = clean => {
 }
 
 let reducer = (state, action) => {
+  let clearQueueResult = {
+    ...state,
+    moveQueue: "",
+  }
   switch action {
   | DealEight => {
       let cards = splice(state.deck, ~start=0, ~remove=8)
@@ -49,10 +53,7 @@ let reducer = (state, action) => {
     | None => state
     }
 
-  | ClearMoveQueue => {
-      ...state,
-      moveQueue: "",
-    }
+  | ClearMoveQueue => clearQueueResult
 
   | AddMoveSource(cell) =>
     let res = {
@@ -74,29 +75,38 @@ let reducer = (state, action) => {
       }
     }
 
-  | MoveCard(cell) =>
-    switch state.moveQueue == cell {
-    | true => {
-        ...state,
-        moveQueue: "",
-      }
+  | MoveCard(destCell) =>
+    switch state.moveQueue == destCell {
+    | true => clearQueueResult
     | false => {
-        let destCellInd = parseInt(String.sliceToEnd(cell, ~start=1))
-        let card = switch state.moveQueue == "s0" {
+        let sourceCard = switch state.moveQueue == "s0" {
         | true => Stack.pop(state.discard)
         | false =>
           Stack.pop(
             Array.getUnsafe(state.tableau, parseInt(String.sliceToEnd(state.moveQueue, ~start=1))),
           )
         }
-        switch String.startsWith(cell, "d") {
-        | true => state.foundations[destCellInd] = card
-        | false => Stack.push(Array.getUnsafe(state.tableau, destCellInd), card)
+
+        let destCellInd = parseInt(String.sliceToEnd(destCell, ~start=1))
+
+        switch String.startsWith(destCell, "d") {
+        | true =>
+          switch Null.toOption(Array.getUnsafe(state.foundations, destCellInd)) {
+          | Some(destCard) =>
+            switch PCard.canMoveToFoundation(Null.getUnsafe(sourceCard), destCard) {
+            | true => state.foundations[destCellInd] = sourceCard
+            | false => Console.log("not same suit or not next rank")
+            }
+          | None =>
+            switch PCard.view(Null.getUnsafe(sourceCard)).rank == Ace {
+            | true => state.foundations[destCellInd] = sourceCard
+            | false => Console.log("not an ace")
+            }
+          }
+
+        | false => Stack.push(Array.getUnsafe(state.tableau, destCellInd), sourceCard)
         }
-        {
-          ...state,
-          moveQueue: "",
-        }
+        clearQueueResult
       }
     }
   }

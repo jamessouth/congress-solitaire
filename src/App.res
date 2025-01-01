@@ -129,26 +129,7 @@ let initialState: Reducer.state = {
   discard: Stack.make(),
 }
 let htp = "HOW TO PLAY"
-let suits = ["diamonds", "clubs", "hearts", "spades"]
-let ranks = [
-  "ace",
-  "two",
-  "three",
-  "four",
-  "five",
-  "six",
-  "seven",
-  "eight",
-  "nine",
-  "ten",
-  "jack",
-  "queen",
-  "king",
-]
-
-let suitRand = Int.mod(Float.toInt(Math.random() *. 100.0), 4)
-let rankRand = Int.mod(Float.toInt(Math.random() *. 100.0), 13)
-let modalClass = Array.getUnsafe(suits, suitRand) ++ "_" ++ Array.getUnsafe(ranks, rankRand)
+let rand = Int.mod(Float.toInt(Math.random() *. 100.0), 52)
 
 @react.component
 let make = () => {
@@ -201,7 +182,7 @@ let make = () => {
         <Game tableau foundations moveQueue />
       </div>
       {switch modalOpen {
-      | true => <Modal setModalOpen modalClass />
+      | true => <Modal setModalOpen modalClass={PCard.view(Array.getUnsafe(deck, rand)).bgClass} />
       | false => React.null
       }}
       <div
@@ -211,7 +192,7 @@ let make = () => {
         | false => _ => ()
         }}>
         <button
-          className={`_stbtn pt-0.5 h-24 w-28 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
+          className={`_stbtn pt-0.5 h-24 w-28 outline-dotted outline-1 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
           onClick={_ => {
             switch startBtnText == htp {
             | true => setModalOpen(_ => true)

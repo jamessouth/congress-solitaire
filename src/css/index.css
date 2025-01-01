@@ -13,12 +13,6 @@
   border-width: 0;
 }
 main > div:first-child {
-  /* background: linear-gradient(
-    to right,
-    #3ecc16 22%,
-    #2c7c0f 27% 73%,
-    #3ecc16 78%
-  ); */
   grid-template-areas:/* s for source, d for dest, b for both */
     'b0 d0 d1 b1'
     'b2 d2 d3 b3'
@@ -115,159 +109,159 @@ main > div:last-child {
 .d7 {
   grid-area: d7;
 }
-.clubs_ace {
+.clubs_1 {
   background-position: 0 0;
 }
-.clubs_two {
+.clubs_2 {
   background-position: calc(21600% / 11232) 0;
 }
-.clubs_three {
+.clubs_3 {
   background-position: calc(43200% / 11232) 0;
 }
-.clubs_four {
+.clubs_4 {
   background-position: calc(64800% / 11232) 0;
 }
-.clubs_five {
+.clubs_5 {
   background-position: calc(86400% / 11232) 0;
 }
-.clubs_six {
+.clubs_6 {
   background-position: calc(108000% / 11232) 0;
 }
-.clubs_seven {
+.clubs_7 {
   background-position: calc(129600% / 11232) 0;
 }
-.clubs_eight {
+.clubs_8 {
   background-position: calc(151200% / 11232) 0;
 }
-.clubs_nine {
+.clubs_9 {
   background-position: calc(172800% / 11232) 0;
 }
-.clubs_ten {
+.clubs_10 {
   background-position: calc(194400% / 11232) 0;
 }
-.clubs_jack {
+.clubs_11 {
   background-position: calc(216000% / 11232) 0;
 }
-.clubs_queen {
+.clubs_12 {
   background-position: calc(237600% / 11232) 0;
 }
-.clubs_king {
+.clubs_13 {
   background-position: calc(259200% / 11232) 0;
 }
-.diamonds_ace {
+.diamonds_1 {
   background-position: calc(280800% / 11232) 0;
 }
-.diamonds_two {
+.diamonds_2 {
   background-position: calc(302400% / 11232) 0;
 }
-.diamonds_three {
+.diamonds_3 {
   background-position: calc(324000% / 11232) 0;
 }
-.diamonds_four {
+.diamonds_4 {
   background-position: calc(345600% / 11232) 0;
 }
-.diamonds_five {
+.diamonds_5 {
   background-position: calc(367200% / 11232) 0;
 }
-.diamonds_six {
+.diamonds_6 {
   background-position: calc(388800% / 11232) 0;
 }
-.diamonds_seven {
+.diamonds_7 {
   background-position: calc(410400% / 11232) 0;
 }
-.diamonds_eight {
+.diamonds_8 {
   background-position: calc(432000% / 11232) 0;
 }
-.diamonds_nine {
+.diamonds_9 {
   background-position: calc(453600% / 11232) 0;
 }
-.diamonds_ten {
+.diamonds_10 {
   background-position: calc(475200% / 11232) 0;
 }
-.diamonds_jack {
+.diamonds_11 {
   background-position: calc(496800% / 11232) 0;
 }
-.diamonds_queen {
+.diamonds_12 {
   background-position: calc(518400% / 11232) 0;
 }
-.diamonds_king {
+.diamonds_13 {
   background-position: calc(540000% / 11232) 0;
 }
-.hearts_ace {
+.hearts_1 {
   background-position: calc(561600% / 11232) 0;
 }
-.hearts_two {
+.hearts_2 {
   background-position: calc(583200% / 11232) 0;
 }
-.hearts_three {
+.hearts_3 {
   background-position: calc(604800% / 11232) 0;
 }
-.hearts_four {
+.hearts_4 {
   background-position: calc(626400% / 11232) 0;
 }
-.hearts_five {
+.hearts_5 {
   background-position: calc(648000% / 11232) 0;
 }
-.hearts_six {
+.hearts_6 {
   background-position: calc(669600% / 11232) 0;
 }
-.hearts_seven {
+.hearts_7 {
   background-position: calc(691200% / 11232) 0;
 }
-.hearts_eight {
+.hearts_8 {
   background-position: calc(712800% / 11232) 0;
 }
-.hearts_nine {
+.hearts_9 {
   background-position: calc(734400% / 11232) 0;
 }
-.hearts_ten {
+.hearts_10 {
   background-position: calc(756000% / 11232) 0;
 }
-.hearts_jack {
+.hearts_11 {
   background-position: calc(777600% / 11232) 0;
 }
-.hearts_queen {
+.hearts_12 {
   background-position: calc(799200% / 11232) 0;
 }
-.hearts_king {
+.hearts_13 {
   background-position: calc(820800% / 11232) 0;
 }
-.spades_ace {
+.spades_1 {
   background-position: calc(842400% / 11232) 0;
 }
-.spades_two {
+.spades_2 {
   background-position: calc(864000% / 11232) 0;
 }
-.spades_three {
+.spades_3 {
   background-position: calc(885600% / 11232) 0;
 }
-.spades_four {
+.spades_4 {
   background-position: calc(907200% / 11232) 0;
 }
-.spades_five {
+.spades_5 {
   background-position: calc(928800% / 11232) 0;
 }
-.spades_six {
+.spades_6 {
   background-position: calc(950400% / 11232) 0;
 }
-.spades_seven {
+.spades_7 {
   background-position: calc(972000% / 11232) 0;
 }
-.spades_eight {
+.spades_8 {
   background-position: calc(993600% / 11232) 0;
 }
-.spades_nine {
+.spades_9 {
   background-position: calc(1015200% / 11232) 0;
 }
-.spades_ten {
+.spades_10 {
   background-position: calc(1036800% / 11232) 0;
 }
-.spades_jack {
+.spades_11 {
   background-position: calc(1058400% / 11232) 0;
 }
-.spades_queen {
+.spades_12 {
   background-position: calc(1080000% / 11232) 0;
 }
-.spades_king {
+.spades_13 {
   background-position: calc(1101600% / 11232) 0;
 }
