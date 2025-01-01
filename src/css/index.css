@@ -109,6 +109,10 @@ main > div:last-child {
 .d7 {
   grid-area: d7;
 }
+.clubs_0 {
+  background-image: url(/c1.webp);
+  background-size: contain;
+}
 .clubs_1 {
   background-position: 0 0;
 }
@@ -147,6 +151,10 @@ main > div:last-child {
 }
 .clubs_13 {
   background-position: calc(259200% / 11232) 0;
+}
+.diamonds_0 {
+  background-image: url(/d1.webp);
+  background-size: contain;
 }
 .diamonds_1 {
   background-position: calc(280800% / 11232) 0;
@@ -187,6 +195,10 @@ main > div:last-child {
 .diamonds_13 {
   background-position: calc(540000% / 11232) 0;
 }
+.hearts_0 {
+  background-image: url(/h1.webp);
+  background-size: contain;
+}
 .hearts_1 {
   background-position: calc(561600% / 11232) 0;
 }
@@ -225,6 +237,10 @@ main > div:last-child {
 }
 .hearts_13 {
   background-position: calc(820800% / 11232) 0;
+}
+.spades_0 {
+  background-image: url(/s1.webp);
+  background-size: contain;
 }
 .spades_1 {
   background-position: calc(842400% / 11232) 0;

@@ -44,10 +44,7 @@ let make = (~tableau, ~foundations, ~moveQueue) => {
     {React.array(
       Array.mapWithIndex(foundations, (card, i) => {
         let gridArea = "d" ++ Int.toString(i)
-        switch Null.toOption(card) {
-        | Some(card) => <Card key=gridArea card gridArea isSelected=false />
-        | None => React.null
-        }
+        <Card key=gridArea card gridArea isSelected=false />
       }),
     )}
   </>

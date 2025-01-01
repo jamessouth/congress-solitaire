@@ -4,7 +4,7 @@
 type state = {
   deck: array<PCard.t>,
   tableau: array<Stack.t<Null.t<PCard.t>>>,
-  foundations: array<Null.t<PCard.t>>,
+  foundations: array<PCard.t>,
   moveQueue: string,
   discard: Stack.t<Null.t<PCard.t>>,
 }
@@ -91,17 +91,12 @@ let reducer = (state, action) => {
 
         switch String.startsWith(destCell, "d") {
         | true =>
-          switch Null.toOption(Array.getUnsafe(state.foundations, destCellInd)) {
-          | Some(destCard) =>
-            switch PCard.canMoveToFoundation(Null.getUnsafe(sourceCard), destCard) {
-            | true => state.foundations[destCellInd] = sourceCard
-            | false => Console.log("not same suit or not next rank")
-            }
-          | None =>
-            switch PCard.view(Null.getUnsafe(sourceCard)).rank == Ace {
-            | true => state.foundations[destCellInd] = sourceCard
-            | false => Console.log("not an ace")
-            }
+          switch PCard.canMoveToFoundation(
+            Null.getUnsafe(sourceCard),
+            Array.getUnsafe(state.foundations, destCellInd),
+          ) {
+          | true => state.foundations[destCellInd] = Null.getUnsafe(sourceCard)
+          | false => Console.log("not same suit or not next rank")
           }
 
         | false => Stack.push(Array.getUnsafe(state.tableau, destCellInd), sourceCard)

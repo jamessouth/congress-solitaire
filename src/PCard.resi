@@ -18,6 +18,7 @@ type rank =
   | @as(3) Three
   | @as(2) Two
   | @as(1) Ace
+  | @as(0) Zero
 type view = {
   suit: suit,
   rank: rank,
