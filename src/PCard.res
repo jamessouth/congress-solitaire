@@ -46,3 +46,9 @@ let view: t => view = t => {
 
 let canMoveToFoundation: (t, t) => bool = (source, dest) =>
   source.suit == dest.suit && (source.rank :> int) - (dest.rank :> int) == 1
+
+let canMoveToTableau: (t, Null.t<t>) => bool = (source, dest) =>
+  switch Null.toOption(dest) {
+  | None => true
+  | Some(card) => (card.rank :> int) - (source.rank :> int) == 1
+  }

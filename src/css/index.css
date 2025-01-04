@@ -34,15 +34,15 @@ main > div:last-child {
     '.'
     '.'
     '.'
-    '_deck'
+    '__deck'
     's_8';
 }
 ._stbtn {
   grid-area: _stbtn;
   text-shadow: 1px 1px 3px #e9ce98, -1px -1px 1px #b63326;
 }
-._deck {
-  grid-area: _deck;
+.__deck {
+  grid-area: __deck;
   height: 25vh;
 }
 .s_8 {

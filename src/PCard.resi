@@ -27,3 +27,4 @@ type view = {
 let make: (suit, rank) => t
 let view: t => view
 let canMoveToFoundation: (t, t) => bool
+let canMoveToTableau: (t, Null.t<t>) => bool

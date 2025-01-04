@@ -1,5 +1,5 @@
 @react.component
-let make = (~tableau, ~foundations, ~moveQueue) => {
+let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
   <>
     {React.array(
       Array.map(
@@ -36,14 +36,15 @@ let make = (~tableau, ~foundations, ~moveQueue) => {
       Array.mapWithIndex(tableau, (stack, i) => {
         let gridArea = "sd" ++ Int.toString(i)
         switch Null.toOption(Stack.peek(stack)) {
-        | Some(card) => <Card key=gridArea card gridArea isSelected={moveQueue == gridArea} />
+        | Some(card) =>
+          <Card key=gridArea card gridArea isSelected={moveQueue.sourceCell == gridArea} />
         | None => React.null
         }
       }),
     )}
     {React.array(
       Array.mapWithIndex(foundations, (card, i) => {
-        let gridArea = "_d" ++ (Int.toString(i) + 8)
+        let gridArea = "_d" ++ Int.toString(i + 8)
         <Card key=gridArea card gridArea isSelected=false />
       }),
     )}

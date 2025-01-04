@@ -125,7 +125,7 @@ let initialState: Reducer.state = {
     PCard.make(Spades, Zero),
     PCard.make(Spades, Zero),
   ],
-  moveQueue: {sourceCellIndex: -1, card: PCard.make(Clubs, Zero)},
+  moveQueue: {sourceCell: "", sourceCellIndex: -1, card: PCard.make(Clubs, Zero)},
   discard: Stack.make(),
 }
 let htp = "HOW TO PLAY"
@@ -168,7 +168,7 @@ let make = () => {
         | ("s", "_", false) => dispatch(ClearMoveQueue)
         | (_, "d", false) => dispatch(MoveCard(class))
         | (_, "d", true) => Console.log("not a source cell: " ++ class)
-        | (_, _) => Console.log("other class: " ++ class)
+        | (_, _, _) => Console.log("other class: " ++ class)
         }
       | None => Console.log("no class")
       }
@@ -182,7 +182,16 @@ let make = () => {
         <Game tableau foundations moveQueue />
       </div>
       {switch modalOpen {
-      | true => <Modal setModalOpen modalClass={PCard.view(Array.getUnsafe(deck, rand)).bgClass} />
+      | true =>
+        <Modal
+          setModalOpen
+          modalClass={PCard.view(
+            switch deck[rand] {
+            | Some(card) => card
+            | None => PCard.make(Diamonds, King)
+            },
+          ).bgClass}
+        />
       | false => React.null
       }}
       <div
@@ -204,7 +213,7 @@ let make = () => {
           {React.string(startBtnText)}
         </button>
         <CardOutline
-          gridArea="_deck"
+          gridArea="__deck"
           cls={"outline-dotted rotate-110 relative select-none outline-2 " ++
           switch gameStarted {
           | true => "cursor-pointer "
@@ -236,7 +245,7 @@ let make = () => {
           </span>
         </CardOutline>
         {switch Null.toOption(Stack.peek(discard)) {
-        | Some(card) => <Card card gridArea="s_8" isSelected={moveQueue == "s_8"} />
+        | Some(card) => <Card card gridArea="s_8" isSelected={moveQueue.sourceCell == "s_8"} />
         | None => React.null
         }}
       </div>

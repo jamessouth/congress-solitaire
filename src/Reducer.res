@@ -2,6 +2,7 @@
 @send external splice: (array<'a>, ~start: int, ~remove: int) => array<'a> = "splice"
 
 type queueData = {
+  sourceCell: string,
   sourceCellIndex: int,
   card: PCard.t,
 }
@@ -29,14 +30,15 @@ let init = clean => {
   discard: clean.discard,
 }
 
-let sources = Array.concat(state.tableau, [state.discard])
 // let destinations = Array.concat(state.tableau, state.foundations)
+let placeholderCard = PCard.make(Clubs, Zero)
 
 let reducer = (state, action) => {
-  //   let clearQueueResult = {
-  //     ...state,
-  //     moveQueue: {sourceCellIndex: -1, card: Null.null},
-  //   }
+  let sources = Array.concat(state.tableau, [state.discard])
+  let clearQueueResult = {
+    ...state,
+    moveQueue: {sourceCell: "", sourceCellIndex: -1, card: placeholderCard},
+  }
   switch action {
   | DealEight => {
       let cards = splice(state.deck, ~start=0, ~remove=8)
@@ -61,44 +63,50 @@ let reducer = (state, action) => {
     | None => state
     }
 
-  | ClearMoveQueue => init.moveQueue
+  | ClearMoveQueue => clearQueueResult
 
   | AddMoveSource(sourceCell) => {
       let sourceCellIndex = parseInt(String.sliceToEnd(sourceCell, ~start=2))
       switch Null.toOption(Stack.peek(Array.getUnsafe(sources, sourceCellIndex))) {
-      | Null => state
+      | None => state
       | Some(card) => {
           ...state,
-          moveQueue: {sourceCellIndex, card},
+          moveQueue: {sourceCell, sourceCellIndex, card},
         }
       }
     }
 
   | MoveCard(destCell) =>
-    switch state.moveQueue == destCell {
+    switch state.moveQueue.sourceCell == destCell {
     | true => clearQueueResult
     | false => {
-        // let sourceCard = switch state.moveQueue == "s_8" {
-        // | true => Stack.pop(state.discard)
-        // | false =>
-        //   Stack.pop(
-        //     Array.getUnsafe(state.tableau, parseInt(String.sliceToEnd(state.moveQueue, ~start=1))),
-        //   )
-        // }
-
-        let destCellInd = parseInt(String.sliceToEnd(destCell, ~start=1))
+        let destCellInd = parseInt(String.sliceToEnd(destCell, ~start=2))
 
         switch destCellInd > 7 {
         | true =>
           switch PCard.canMoveToFoundation(
-            Null.getUnsafe(state.moveQueue.card),
-            Array.getUnsafe(state.foundations, destCellInd),
+            state.moveQueue.card,
+            Array.getUnsafe(state.foundations, destCellInd - 8),
           ) {
-          | true => state.foundations[destCellInd] = Null.getUnsafe(sourceCard)
+          | true =>
+            state.foundations[
+              destCellInd - 8
+            ] = Null.getUnsafe(Stack.pop(Array.getUnsafe(sources, state.moveQueue.sourceCellIndex)))
           | false => Console.log("not same suit or not next rank")
           }
 
-        | false => Stack.push(Array.getUnsafe(state.tableau, destCellInd), sourceCard)
+        | false =>
+          switch PCard.canMoveToTableau(
+            state.moveQueue.card,
+            Stack.peek(Array.getUnsafe(state.tableau, destCellInd)),
+          ) {
+          | true =>
+            Stack.push(
+              Array.getUnsafe(state.tableau, destCellInd),
+              Stack.pop(Array.getUnsafe(sources, state.moveQueue.sourceCellIndex)),
+            )
+          | false => Console.log("not prev rank")
+          }
         }
         clearQueueResult
       }
