@@ -1,11 +1,16 @@
 @val external parseInt: string => int = "parseInt"
 @send external splice: (array<'a>, ~start: int, ~remove: int) => array<'a> = "splice"
 
+type queueData = {
+  sourceCellIndex: int,
+  card: PCard.t,
+}
+
 type state = {
   deck: array<PCard.t>,
   tableau: array<Stack.t<Null.t<PCard.t>>>,
   foundations: array<PCard.t>,
-  moveQueue: string,
+  moveQueue: queueData,
   discard: Stack.t<Null.t<PCard.t>>,
 }
 
@@ -24,11 +29,14 @@ let init = clean => {
   discard: clean.discard,
 }
 
+let sources = Array.concat(state.tableau, [state.discard])
+// let destinations = Array.concat(state.tableau, state.foundations)
+
 let reducer = (state, action) => {
-  let clearQueueResult = {
-    ...state,
-    moveQueue: "",
-  }
+  //   let clearQueueResult = {
+  //     ...state,
+  //     moveQueue: {sourceCellIndex: -1, card: Null.null},
+  //   }
   switch action {
   | DealEight => {
       let cards = splice(state.deck, ~start=0, ~remove=8)
@@ -53,25 +61,16 @@ let reducer = (state, action) => {
     | None => state
     }
 
-  | ClearMoveQueue => clearQueueResult
+  | ClearMoveQueue => init.moveQueue
 
-  | AddMoveSource(cell) =>
-    let res = {
-      ...state,
-      moveQueue: cell,
-    }
-    switch String.startsWith(cell, "b") {
-    | true =>
-      switch Stack.isEmpty(
-        Array.getUnsafe(state.tableau, parseInt(String.sliceToEnd(cell, ~start=1))),
-      ) {
-      | true => state
-      | false => res
-      }
-    | false =>
-      switch Stack.isEmpty(state.discard) {
-      | true => state
-      | false => res
+  | AddMoveSource(sourceCell) => {
+      let sourceCellIndex = parseInt(String.sliceToEnd(sourceCell, ~start=2))
+      switch Null.toOption(Stack.peek(Array.getUnsafe(sources, sourceCellIndex))) {
+      | Null => state
+      | Some(card) => {
+          ...state,
+          moveQueue: {sourceCellIndex, card},
+        }
       }
     }
 
@@ -79,20 +78,20 @@ let reducer = (state, action) => {
     switch state.moveQueue == destCell {
     | true => clearQueueResult
     | false => {
-        let sourceCard = switch state.moveQueue == "s0" {
-        | true => Stack.pop(state.discard)
-        | false =>
-          Stack.pop(
-            Array.getUnsafe(state.tableau, parseInt(String.sliceToEnd(state.moveQueue, ~start=1))),
-          )
-        }
+        // let sourceCard = switch state.moveQueue == "s_8" {
+        // | true => Stack.pop(state.discard)
+        // | false =>
+        //   Stack.pop(
+        //     Array.getUnsafe(state.tableau, parseInt(String.sliceToEnd(state.moveQueue, ~start=1))),
+        //   )
+        // }
 
         let destCellInd = parseInt(String.sliceToEnd(destCell, ~start=1))
 
-        switch String.startsWith(destCell, "d") {
+        switch destCellInd > 7 {
         | true =>
           switch PCard.canMoveToFoundation(
-            Null.getUnsafe(sourceCard),
+            Null.getUnsafe(state.moveQueue.card),
             Array.getUnsafe(state.foundations, destCellInd),
           ) {
           | true => state.foundations[destCellInd] = Null.getUnsafe(sourceCard)

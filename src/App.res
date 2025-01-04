@@ -125,7 +125,7 @@ let initialState: Reducer.state = {
     PCard.make(Spades, Zero),
     PCard.make(Spades, Zero),
   ],
-  moveQueue: "",
+  moveQueue: {sourceCellIndex: -1, card: PCard.make(Clubs, Zero)},
   discard: Stack.make(),
 }
 let htp = "HOW TO PLAY"
@@ -159,16 +159,16 @@ let make = () => {
     | true =>
       switch tgt["classList"][0] {
       | Some(class) =>
-        switch String.get(class, 0) {
-        | None => Console.log("empty class name")
-        | Some(c) =>
-          switch (c, String.length(moveQueue) == 0) {
-          | ("s", true) | ("b", true) => dispatch(AddMoveSource(class))
-          | ("d", false) | ("b", false) => dispatch(MoveCard(class))
-          | ("s", false) => dispatch(ClearMoveQueue)
-          | ("d", true) => Console.log("not a source cell: " ++ class)
-          | (_, _) => Console.log("other class: " ++ class)
-          }
+        switch (
+          String.getUnsafe(class, 0),
+          String.getUnsafe(class, 1),
+          String.length(moveQueue.sourceCell) == 0,
+        ) {
+        | ("s", _, true) => dispatch(AddMoveSource(class))
+        | ("s", "_", false) => dispatch(ClearMoveQueue)
+        | (_, "d", false) => dispatch(MoveCard(class))
+        | (_, "d", true) => Console.log("not a source cell: " ++ class)
+        | (_, _) => Console.log("other class: " ++ class)
         }
       | None => Console.log("no class")
       }
@@ -224,7 +224,7 @@ let make = () => {
           </span>
         </CardOutline>
         <CardOutline
-          gridArea="s0"
+          gridArea="s_8"
           cls={"outline-dotted rotate-110 relative select-none outline-2 " ++
           switch gameStarted {
           | true => "cursor-pointer"
@@ -236,7 +236,7 @@ let make = () => {
           </span>
         </CardOutline>
         {switch Null.toOption(Stack.peek(discard)) {
-        | Some(card) => <Card card gridArea="s0" isSelected={moveQueue == "s0"} />
+        | Some(card) => <Card card gridArea="s_8" isSelected={moveQueue == "s_8"} />
         | None => React.null
         }}
       </div>
