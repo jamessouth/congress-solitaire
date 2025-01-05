@@ -1,5 +1,5 @@
 @react.component
-let make = (~card, ~gridArea, ~isSelected) => {
+let make = (~card, ~gridArea, ~isSelected, ~children=?) => {
   let {bgClass} = PCard.view(card)
   <div
     className={`${gridArea} ${bgClass} bg-[percentage:5300%] aspect-9/16 rounded-lg  cursor-pointer relative select-none ` ++
@@ -14,6 +14,10 @@ let make = (~card, ~gridArea, ~isSelected) => {
     switch bgClass == "" {
     | true => ""
     | false => "bg-[url(/cards.webp)]"
+    }}>
+    {switch children {
+    | Some(el) => el
+    | None => React.null
     }}
-  />
+  </div>
 }

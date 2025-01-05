@@ -5,20 +5,20 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
       Array.map(
         [
           "sd0",
-          "_d8",
-          "_d9",
+          "_d0",
+          "_d1",
           "sd1",
           "sd2",
-          "_d10",
-          "_d11",
+          "_d2",
+          "_d3",
           "sd3",
           "sd4",
-          "_d12",
-          "_d13",
+          "_d4",
+          "_d5",
           "sd5",
           "sd6",
-          "_d14",
-          "_d15",
+          "_d6",
+          "_d7",
           "sd7",
         ],
         gridArea =>
@@ -37,14 +37,18 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
         let gridArea = "sd" ++ Int.toString(i)
         switch Null.toOption(Stack.peek(stack)) {
         | Some(card) =>
-          <Card key=gridArea card gridArea isSelected={moveQueue.sourceCell == gridArea} />
+          <Card key=gridArea card gridArea isSelected={moveQueue.sourceCell == gridArea}>
+            <span className="absolute w-24 text-center font-cutive text-sm text-cardWhite ">
+              {React.string(`${Int.toString(Stack.getSize(stack))}`)}
+            </span>
+          </Card>
         | None => React.null
         }
       }),
     )}
     {React.array(
       Array.mapWithIndex(foundations, (card, i) => {
-        let gridArea = "_d" ++ Int.toString(i + 8)
+        let gridArea = "_d" ++ Int.toString(i)
         <Card key=gridArea card gridArea isSelected=false />
       }),
     )}

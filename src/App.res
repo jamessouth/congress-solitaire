@@ -129,10 +129,9 @@ let initialState: Reducer.state = {
   discard: Stack.make(),
 }
 let htp = "HOW TO PLAY"
-let rand = Int.mod(Float.toInt(Math.random() *. 100.0), 52)
 
 @react.component
-let make = () => {
+let make = (~rand) => {
   let (startBtnText, setStartBtnText) = React.useState(_ => "DEAL TO BEGIN")
   let (startBtnColor, setStartBtnColor) = React.useState(_ => "text-cardBlack")
   let (modalOpen, setModalOpen) = React.useState(_ => false)
@@ -212,6 +211,9 @@ let make = () => {
           }}>
           {React.string(startBtnText)}
         </button>
+        <div className="_score text-cardBlack text-xl font-cutive  ">
+          {React.string("Score: ")}
+        </div>
         <CardOutline
           gridArea="__deck"
           cls={"outline-dotted rotate-110 relative select-none outline-2 " ++

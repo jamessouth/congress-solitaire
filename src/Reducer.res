@@ -30,7 +30,6 @@ let init = clean => {
   discard: clean.discard,
 }
 
-// let destinations = Array.concat(state.tableau, state.foundations)
 let placeholderCard = PCard.make(Clubs, Zero)
 
 let reducer = (state, action) => {
@@ -82,16 +81,16 @@ let reducer = (state, action) => {
     | false => {
         let destCellInd = parseInt(String.sliceToEnd(destCell, ~start=2))
 
-        switch destCellInd > 7 {
+        switch String.startsWith(destCell, "_d") {
         | true =>
           switch PCard.canMoveToFoundation(
             state.moveQueue.card,
-            Array.getUnsafe(state.foundations, destCellInd - 8),
+            Array.getUnsafe(state.foundations, destCellInd),
           ) {
           | true =>
-            state.foundations[
-              destCellInd - 8
-            ] = Null.getUnsafe(Stack.pop(Array.getUnsafe(sources, state.moveQueue.sourceCellIndex)))
+            state.foundations[destCellInd] = Null.getUnsafe(
+              Stack.pop(Array.getUnsafe(sources, state.moveQueue.sourceCellIndex)),
+            )
           | false => Console.log("not same suit or not next rank")
           }
 
