@@ -219,7 +219,7 @@ let make = () => {
         | false => _ => ()
         }}>
         <button
-          className={`_stbtn pt-0.5 h-24 w-28 outline-dotted outline-2 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
+          className={`_stbtn pt-0.5 h-24 w-32 outline-dotted outline-2 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
           onClick={_ => {
             switch startBtnText == htp {
             | true => setModalOpen(_ => true)
@@ -230,7 +230,7 @@ let make = () => {
           }}>
           {React.string(startBtnText)}
         </button>
-        <div className="_score text-cardBlack text-xl font-cutive text-center ">
+        <div className="_score text-cardBlack text-xl font-cutive text-center max-h-fit">
           {React.string("Score: " ++ Int.toString(score))}
         </div>
         <CardOutline

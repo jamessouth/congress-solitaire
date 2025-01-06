@@ -38,7 +38,12 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
         switch Null.toOption(Stack.peek(stack)) {
         | Some(card) =>
           <Card key=gridArea card gridArea isSelected={moveQueue.sourceCell == gridArea}>
-            <span className="absolute w-24 text-center font-cutive text-sm text-cardBlack ">
+            <span
+              className={"absolute max-w-fit bg-cardWhite top-1/2 text-center font-cutive text-sm text-cardBlack " ++
+              switch Int.mod(i, 2) == 0 {
+              | true => "-left-1/4"
+              | false => "-right-1/4"
+              }}>
               {React.string(`${Int.toString(Stack.getSize(stack))}`)}
             </span>
           </Card>
