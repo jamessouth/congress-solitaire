@@ -38,7 +38,7 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
         switch Null.toOption(Stack.peek(stack)) {
         | Some(card) =>
           <Card key=gridArea card gridArea isSelected={moveQueue.sourceCell == gridArea}>
-            <span className="absolute w-24 text-center font-cutive text-sm text-cardWhite ">
+            <span className="absolute w-24 text-center font-cutive text-sm text-cardBlack ">
               {React.string(`${Int.toString(Stack.getSize(stack))}`)}
             </span>
           </Card>
@@ -49,7 +49,16 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
     {React.array(
       Array.mapWithIndex(foundations, (card, i) => {
         let gridArea = "_d" ++ Int.toString(i)
-        <Card key=gridArea card gridArea isSelected=false />
+        <Card key=gridArea card gridArea isSelected=false>
+          {switch PCard.view(card).rank == King {
+          | true =>
+            <div
+              className="w-full h-full text-center text-[15vh] rounded-lg bg-cardBlack/70 text-cardWhite/70 mix-blend-hard-light">
+              {React.string("✓")}
+            </div>
+          | false => React.null
+          }}
+        </Card>
       }),
     )}
   </>

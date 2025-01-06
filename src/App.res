@@ -131,14 +131,32 @@ let initialState: Reducer.state = {
 let htp = "HOW TO PLAY"
 
 @react.component
-let make = (~rand) => {
+let make = () => {
   let (startBtnText, setStartBtnText) = React.useState(_ => "DEAL TO BEGIN")
   let (startBtnColor, setStartBtnColor) = React.useState(_ => "text-cardBlack")
   let (modalOpen, setModalOpen) = React.useState(_ => false)
   let (gameStarted, setGameStarted) = React.useState(_ => false)
+  let (modalClass, setModalClass) = React.useState(_ => "")
+  let (score, setScore) = React.useState(_ => 0)
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
 
   let {deck, tableau, foundations, moveQueue, discard} = state
+
+  React.useEffectOnEveryRender(() => {
+    setScore(_ => Array.reduce(foundations, 0, (acc, item) => acc + (PCard.view(item).rank :> int)))
+    None
+  })
+
+  React.useEffect(() => {
+    Console.log("founds changed")
+    None
+  }, [foundations])
+
+  React.useEffect(() => {
+    let rand = Int.mod(Float.toInt(Math.random() *. 100.0), 52)
+    setModalClass(_ => PCard.view(Array.getUnsafe(deck, rand)).bgClass)
+    None
+  }, [])
 
   React.useEffect(() => {
     switch startBtnText == htp {
@@ -181,16 +199,7 @@ let make = (~rand) => {
         <Game tableau foundations moveQueue />
       </div>
       {switch modalOpen {
-      | true =>
-        <Modal
-          setModalOpen
-          modalClass={PCard.view(
-            switch deck[rand] {
-            | Some(card) => card
-            | None => PCard.make(Diamonds, King)
-            },
-          ).bgClass}
-        />
+      | true => <Modal setModalOpen modalClass />
       | false => React.null
       }}
       <div
@@ -211,8 +220,8 @@ let make = (~rand) => {
           }}>
           {React.string(startBtnText)}
         </button>
-        <div className="_score text-cardBlack text-xl font-cutive  ">
-          {React.string("Score: ")}
+        <div className="_score text-cardBlack text-xl font-cutive text-center ">
+          {React.string("Score: " ++ Int.toString(score))}
         </div>
         <CardOutline
           gridArea="__deck"
