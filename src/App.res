@@ -209,7 +209,7 @@ let make = () => {
         | false => _ => ()
         }}>
         <button
-          className={`_stbtn pt-0.5 h-24 w-28 outline-dotted outline-1 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
+          className={`_stbtn pt-0.5 h-24 w-28 outline-dotted outline-2 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
           onClick={_ => {
             switch startBtnText == htp {
             | true => setModalOpen(_ => true)
@@ -225,7 +225,7 @@ let make = () => {
         </div>
         <CardOutline
           gridArea="__deck"
-          cls={"outline-dotted rotate-110 relative select-none outline-2 " ++
+          cls={"outline-dotted rotate-110 relative select-none " ++
           switch gameStarted {
           | true => "cursor-pointer "
           | false => "cursor-not-allowed "
@@ -245,7 +245,7 @@ let make = () => {
         </CardOutline>
         <CardOutline
           gridArea="s_8"
-          cls={"outline-dotted rotate-110 relative select-none outline-2 " ++
+          cls={"outline-dotted rotate-110 relative select-none " ++
           switch gameStarted {
           | true => "cursor-pointer"
           | false => "cursor-not-allowed"

@@ -26,8 +26,8 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
             key=gridArea
             gridArea
             cls={switch String.startsWith(gridArea, "_d") {
-            | true => "solid"
-            | false => "dashed"
+            | true => "outline"
+            | false => "outline-dashed"
             }}
           />,
       ),
