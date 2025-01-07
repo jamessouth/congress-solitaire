@@ -205,9 +205,7 @@ let make = () => {
 
   <>
     <main className="h-full flex justify-evenly portrait:hidden">
-      <div className="aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
-        <Game tableau foundations moveQueue />
-      </div>
+      <Game tableau foundations moveQueue onGameClick />
       {switch modalOpen {
       | true => <Modal setModalOpen modalClass />
       | false => React.null
@@ -218,63 +216,17 @@ let make = () => {
         | true => e => onGameClick(e)
         | false => _ => ()
         }}>
-        <button
-          className={`_stbtn pt-0.5 h-24 w-32 outline-dotted outline-2 rounded-xl place-self-center font-cutive text-2xl ${startBtnColor} `}
-          onClick={_ => {
-            switch startBtnText == htp {
-            | true => setModalOpen(_ => true)
-            | false => ()
-            }
-            setStartBtnText(_ => htp)
-            setStartBtnColor(_ => "text-cardRed")
-          }}>
-          {React.string(startBtnText)}
-        </button>
-        <div className="_score text-cardBlack text-xl font-cutive text-center max-h-fit">
-          {React.string("Score: " ++ Int.toString(score))}
-        </div>
-        <CardOutline
-          gridArea="__deck"
-          cls={"outline-dotted rotate-110 relative select-none " ++
-          switch gameStarted {
-          | true => "cursor-pointer "
-          | false => "cursor-not-allowed "
-          } ++
-          switch Array.length(deck) == 0 {
-          | true => ""
-          | false => "bg-[url(/cards.webp)] bg-[percentage:5300%] bg-[100%_0]"
-          }}
-          onClick={switch gameStarted {
-          | true => _ => dispatch(DealOne)
-          | false => _ => ()
-          }}>
-          <span
-            className="absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[9.5vh] -ml-14">
-            {React.string(`deck - ${Int.toString(Array.length(deck))}`)}
-          </span>
-        </CardOutline>
-        <CardOutline
-          gridArea="s_8"
-          cls={"outline-dotted rotate-110 relative select-none " ++
-          switch gameStarted {
-          | true => "cursor-pointer"
-          | false => "cursor-not-allowed"
-          }}>
-          <span
-            className="absolute w-24 text-center -rotate-90 font-cutive text-sm text-cardWhite mt-[9.5vh] -ml-14">
-            {React.string(`discard - ${Int.toString(Stack.getSize(discard))}`)}
-          </span>
-        </CardOutline>
-        {switch Null.toOption(Stack.peek(discard)) {
-        | Some(card) => <Card card gridArea="s_8" isSelected={moveQueue.sourceCell == "s_8"} />
-        | None => React.null
-        }}
+        <Start startBtnColor startBtnText setModalOpen htp setStartBtnText setStartBtnColor />
+        <Score score />
+        <Deck dispatch gameStarted deck />
+        <Discard gameStarted discard moveQueue />
       </div>
     </main>
     <main className="landscape:hidden">
       <p className="text-center text-xl">
-        {React.string("Portrait orientation not supported. Please rotate your
-      device to landscape orientation.")}
+        {React.string(
+          "Portrait orientation not supported. Please rotate your device to landscape orientation.",
+        )}
       </p>
     </main>
   </>

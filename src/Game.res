@@ -1,6 +1,6 @@
 @react.component
-let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
-  <>
+let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData, ~onGameClick) => {
+  <div className="aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
     {React.array(
       Array.map(
         [
@@ -39,10 +39,10 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
         | Some(card) =>
           <Card key=gridArea card gridArea isSelected={moveQueue.sourceCell == gridArea}>
             <span
-              className={"absolute max-w-fit bg-cardWhite top-1/2 text-center font-cutive text-sm text-cardBlack " ++
+              className={"absolute rounded-full h-5 w-5 leading-6 bg-cardWhite top-1/2 text-center font-cutive text-sm text-cardBlack " ++
               switch Int.mod(i, 2) == 0 {
-              | true => "-left-1/4"
-              | false => "-right-1/4"
+              | true => "-left-[22px]"
+              | false => "-right-[22px]"
               }}>
               {React.string(`${Int.toString(Stack.getSize(stack))}`)}
             </span>
@@ -66,5 +66,5 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData) => {
         </Card>
       }),
     )}
-  </>
+  </div>
 }
