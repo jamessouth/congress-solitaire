@@ -143,6 +143,7 @@ let make = () => {
   let (startBtnColor, setStartBtnColor) = React.useState(_ => "text-cardBlack")
   let (modalOpen, setModalOpen) = React.useState(_ => false)
   let (gameStarted, setGameStarted) = React.useState(_ => false)
+  let (isOpen, setIsOpen) = React.useState(_ => false)
   let (modalClass, setModalClass) = React.useState(_ => "")
   let (score, setScore) = React.useState(_ => 0)
   let (state, dispatch) = React.useReducerWithMapState(Reducer.reducer, initialState, Reducer.init)
@@ -203,9 +204,36 @@ let make = () => {
     }
   }
 
+  let handleClick = _ => {
+    setIsOpen(prev => !prev)
+  }
+
   <>
+    <button onClick={handleClick} className="flex flex-col justify-center items-center">
+      <span
+        className={"bg-slate-500 block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm " ++
+        switch isOpen {
+        | true => "rotate-45 translate-y-1"
+        | false => "-translate-y-0.5"
+        }}
+      />
+      <span
+        className={"bg-slate-500 block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 " ++
+        switch isOpen {
+        | true => "opacity-0"
+        | false => "opacity-100"
+        }}
+      />
+      <span
+        className={"bg-slate-500 block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm " ++
+        switch isOpen {
+        | true => "-rotate-45 -translate-y-1"
+        | false => "translate-y-0.5"
+        }}
+      />
+    </button>
     <main className="h-full flex justify-evenly portrait:hidden">
-      <Game tableau foundations moveQueue onGameClick />
+      <Game tableau foundations moveQueue onGameClick score />
       {switch modalOpen {
       | true => <Modal setModalOpen modalClass />
       | false => React.null

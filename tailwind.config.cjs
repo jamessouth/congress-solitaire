@@ -20,6 +20,12 @@ module.exports = {
       fontFamily: {
         cutive: 'Cutive, serif',
       },
+      keyframes: {
+        blink: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.1 },
+        },
+      },
       rotate: {
         70: '70deg',
         110: '110deg',

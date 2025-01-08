@@ -1,5 +1,6 @@
+let winningScore = 104
 @react.component
-let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData, ~onGameClick) => {
+let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData, ~onGameClick, ~score) => {
   <div className="aspect-9/16 h-full grid gap-2 pt-1" onClick={e => onGameClick(e)}>
     {React.array(
       Array.map(
@@ -28,8 +29,51 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData, ~onGameClick)
             cls={switch String.startsWith(gridArea, "_d") {
             | true => "outline"
             | false => "outline-dashed"
+            }}>
+            {switch score == winningScore {
+            | true =>
+              switch gridArea {
+              | "sd0" =>
+                <CardOverlay
+                  key=gridArea
+                  cls="animate-[blink_2.75s_.4s_ease-in-out_infinite] text-cardBlack leading-[2.5] text-[11vh]"
+                  char="Y"
+                />
+              | "sd1" =>
+                <CardOverlay
+                  key=gridArea
+                  cls="animate-[blink_2.75s_1.6s_ease-in-out_infinite] text-cardBlack leading-[2.5] text-[11vh]"
+                  char="W"
+                />
+              | "sd2" =>
+                <CardOverlay
+                  key=gridArea
+                  cls="animate-[blink_2.75s_.8s_ease-in-out_infinite] text-cardBlack leading-[2.5] text-[11vh]"
+                  char="O"
+                />
+              | "sd3" =>
+                <CardOverlay
+                  key=gridArea
+                  cls="animate-[blink_2.75s_2s_ease-in-out_infinite] text-cardBlack leading-[2.5] text-[11vh]"
+                  char="I"
+                />
+              | "sd4" =>
+                <CardOverlay
+                  key=gridArea
+                  cls="animate-[blink_2.75s_1.2s_ease-in-out_infinite] text-cardBlack leading-[2.5] text-[11vh]"
+                  char="U"
+                />
+              | "sd5" =>
+                <CardOverlay
+                  key=gridArea
+                  cls="animate-[blink_2.75s_2.4s_ease-in-out_infinite] text-cardBlack leading-[2.5] text-[11vh]"
+                  char="N"
+                />
+              | _ => React.null
+              }
+            | false => React.null
             }}
-          />,
+          </CardOutline>,
       ),
     )}
     {React.array(
@@ -57,10 +101,9 @@ let make = (~tableau, ~foundations, ~moveQueue: Reducer.queueData, ~onGameClick)
         <Card key=gridArea card gridArea isSelected=false>
           {switch PCard.view(card).rank == King {
           | true =>
-            <div
-              className="w-full h-full text-center text-[15vh] rounded-lg bg-cardBlack/70 text-cardWhite/70 mix-blend-hard-light">
-              {React.string("✓")}
-            </div>
+            <CardOverlay
+              cls="bg-cardBlack/70 text-cardWhite/70 mix-blend-hard-light text-[15vh]" char="✓"
+            />
           | false => React.null
           }}
         </Card>
